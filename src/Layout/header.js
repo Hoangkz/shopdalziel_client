@@ -1,29 +1,23 @@
-import React, { useState } from 'react';
-import FacebookLogin from 'react-facebook-login';
-
+import { useEffect } from 'react';
+import shopApi from '../API/shopApi';
 const Login = () => {
-  const [user, setUser] = useState(null);
+  const username ="zzz"
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await shopApi.search();
+        console.log(res.data);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  },[username]);
 
-  const responseFacebook = (response) => {
-    console.log(response);
-    setUser(response);
-  };
-
+  
   return (
-    <div>
-      {user ? (
-        <div>
-          <h2>Welcome {user.name}</h2>
-          <p>Email: {user.email}</p>
-          <img src={user.picture.data.url} alt="Profile" />
-        </div>
-      ) : (
-        <FacebookLogin
-          appId="YOUR_APP_ID"
-          fields="name,email,picture"
-          callback={responseFacebook}
-        />
-      )}
+    <div className="App">
+      header
     </div>
   );
 };
