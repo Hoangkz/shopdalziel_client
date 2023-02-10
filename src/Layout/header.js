@@ -5,8 +5,8 @@ const Login = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await shopApi.search();
-        console.log(res.data.item);
+        const res = await shopApi.search("a");
+        console.log(res.data);
         
       } catch (error) {
         console.log(error);
