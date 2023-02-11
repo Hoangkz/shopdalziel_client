@@ -5,7 +5,6 @@ import App from './App';
 import { ChakraProvider } from "@chakra-ui/react";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
-import theme from "theme/theme";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -13,7 +12,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <Provider store={store}>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider>
       <App />
       <ToastContainer autoClose={2000} draggablePercent={60} />
     </ChakraProvider>
