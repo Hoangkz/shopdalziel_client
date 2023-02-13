@@ -1,14 +1,22 @@
 import React from "react";
-import routes from "./routes";
+// import routes from "./routes";
 import Home from "./pages/home";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter, 
+        Route,
+        Routes
+        // Link 
+      } from "react-router-dom";
+console.log(Routes);
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 export default function App() {
-  const isLogined = useSelector((state) => state.user.isLogined);
+  // const isLogined = useSelector((state) => state.user.isLogined);
   return (
-      <Router basename="">
-          <Route path={`/home`} element={Home} />
-      </Router>
+    <BrowserRouter basename="">
+      <Routes>
+        <Route path={`/home`} element={Home}/>
+        <Route path={`/`} element={Home}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
