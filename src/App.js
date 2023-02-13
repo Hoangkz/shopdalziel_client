@@ -6,7 +6,6 @@ import { BrowserRouter,
         Routes
         // Link 
       } from "react-router-dom";
-console.log(Routes);
 
 // import { useSelector } from "react-redux";
 export default function App() {
