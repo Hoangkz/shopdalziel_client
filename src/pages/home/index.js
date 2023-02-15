@@ -6,7 +6,7 @@ export default function Home(){
     return(
         <>
             <Header/>
-            <Box h={500}>
+            <Box h={500} backgroundColor="antiquewhite">
             </Box>
             <Footer/>
         </>

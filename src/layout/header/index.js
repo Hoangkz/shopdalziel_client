@@ -1,4 +1,4 @@
-import { Box, Flex, List, ListItem, Icon, Input, Button, ButtonGroup } from "@chakra-ui/react";
+import { Box, Flex, List, ListItem, Icon, Input, Button } from "@chakra-ui/react";
 import { FaFacebook, FaGoogle } from 'react-icons/fa'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BsFillBagCheckFill } from 'react-icons/bs'
@@ -20,42 +20,42 @@ export default function Home(){
                 <Box w="75%"margin="auto" fontSize={14}>
                     <Flex justify={"space-between"} >
                         <List style={{"display":"flex"}} margin="0"padding={0}>
-                            <ListItem margin="8px" >
+                            <ListItem margin="8px" className="navItem">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Home</Link>
                             </ListItem>
-                            <ListItem margin="8px">
+                            <ListItem className="navItem" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Tải ứng dụng</Link>
                             </ListItem>
-                            <ListItem marginX={6} marginY={8} color="#fff">
+                            <ListItem marginX={6} marginY={8} color="#fff" cursor={"inherit"}>
                                 Kết nối 
                             </ListItem>
-                            <ListItem marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
+                            <ListItem className="navItem" marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}><Icon as={FaFacebook}/></Link>
                             </ListItem>
-                            <ListItem marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
+                            <ListItem className="navItem" marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}><Icon as={FaGoogle}/></Link>
                             </ListItem>
                         </List>
                         <List style={{"display":"flex"}} margin="0" padding={0}>
-                            <ListItem margin="8px">
+                            <ListItem className="navItem" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Thông báo</Link>
                             </ListItem>
-                            <ListItem margin="8px">
-                                <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Hỗ trợ</Link>
+                            <ListItem className="navItem" margin="8px">
+                                <a href="tel:0968823201" target={"_blank"} style={{"textDecoration":"none","color":"#fff"}}>Hỗ trợ</a>
                             </ListItem>
-                            <ListItem margin="8px">
+                            <ListItem className="navItem" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng ký</Link>
                             </ListItem>
-                            <ListItem margin="8px">
+                            <ListItem className="navItem" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng nhập</Link>
                             </ListItem>
                         </List>
                     </Flex>
                 </Box>
-                <Box w="80%" margin="auto"pb={0}>
+                <Box w="80%" margin="auto" mt={10} pb={0}>
                     <Flex justify={"space-between"}>
-                        <Box fontSize="2.5rem" color="#fff">
-                            <Link to={"/"} style={{"color":"#fff"}}>
+                        <Box fontSize="2.5rem" color="#fff" >
+                            <Link to={"/"} style={{"color":"#fff"}} className="navItem">
                                 <Icon as ={BsFillBagCheckFill} bg="" color="#fff"/>
                                 Dalziel
                             </Link>
@@ -64,10 +64,13 @@ export default function Home(){
                             <Input onChange={handleChangeInput} w="75%" placeholder='Search' h={40}fontSize="1.1rem" borderRadius={6} outline="none" border={1}paddingX="8px"/>
                             <Button onClick={handleClick} className="buttonNavbar" mx={4} h={40} borderRadius={6} outline="none" border="1px solid #fff" color="#fff" paddingX="8px" background='transparent' >Search</Button>
                         </Box>
-                        <Box fontSize="2.5rem" color="#fff">
+                        <Box fontSize="2.5rem" color="#fff" className="navItem">
                             <Icon as ={AiOutlineShoppingCart}/>
                         </Box>
                     </Flex>
+                </Box>
+                <Box h={4}>
+
                 </Box>
             </Box>
         </>
