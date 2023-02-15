@@ -55,7 +55,7 @@ export default function Home(){
                 <Box w="80%" margin="auto"pb={0}>
                     <Flex justify={"space-between"}>
                         <Box fontSize="2.5rem" color="#fff">
-                            <Link to={"/"}>
+                            <Link to={"/"} style={{"color":"#fff"}}>
                                 <Icon as ={BsFillBagCheckFill} bg="" color="#fff"/>
                                 Dalziel
                             </Link>
