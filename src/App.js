@@ -3,10 +3,9 @@
 import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
 import { publicRoutes } from './routes';
 
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 export default function App() {
-  // const isLogined = useSelector((state) => state.user.isLogined);
-  console.log(publicRoutes)
+  const isLogined = useSelector((state) => state.user.isLogined);
   return (
       <Router>
         <Routes>
