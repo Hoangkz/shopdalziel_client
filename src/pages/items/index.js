@@ -6,7 +6,7 @@ export default function Dashboard() {
 
   return (
       <>
-        <div>item</div>
+        <div>items</div>
         <Link to={"/"}>home</Link>
       </>
   );
