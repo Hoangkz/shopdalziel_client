@@ -10,12 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <Provider store={store}>
+  <Provider store={store}>
+      <React.StrictMode>
         <App />
-        <ToastContainer autoClose={2000} draggablePercent={60} />
-      </Provider>
-  </React.StrictMode>
+      </React.StrictMode>
+      <ToastContainer autoClose={2000} draggablePercent={60} />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

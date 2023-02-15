@@ -1,20 +1,19 @@
-import React from "react";
 // import routes from "./routes";
 import Home from "./pages/home";
-import { BrowserRouter, 
-        Route,
-        Routes
-        // Link 
-      } from "react-router-dom";
+import Items from "./pages/items";
+import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
+
 
 // import { useSelector } from "react-redux";
 export default function App() {
   // const isLogined = useSelector((state) => state.user.isLogined);
+
   return (
-    <BrowserRouter basename="">
-      <Routes>
-        <Route path={`/home`} element={Home}/>
-      </Routes>
-    </BrowserRouter>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/items" element={<Items/>}/>
+        </Routes>
+      </Router>
   );
 }
