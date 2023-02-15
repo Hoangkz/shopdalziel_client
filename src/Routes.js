@@ -1,21 +1,26 @@
 import Home from "./pages/home";
 import Items from "./pages/items";
+import Footer from "./layout/footer";
 
 const publicRoutes =[
     {
         path:"/",
-        component:Home,
+        element:Home,
     },
     {
         path:"/items",
-        component:Items,
+        element:Items,
+    },
+    {
+        path:"/footer",
+        element:Footer,
     },
 ]
 
 const privateRoutes =[
     {
         path:"/home",
-        component:Home,
+        element:Home,
     },
 ]
 export {publicRoutes,privateRoutes }

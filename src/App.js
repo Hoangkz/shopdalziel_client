@@ -10,7 +10,7 @@ export default function App() {
       <Router>
         <Routes>
           {publicRoutes.map((route,index) =>{
-            const Page = route.component;
+            const Page = route.element;
             return <Route key={index} path={route.path} element={<Page/>} />
           })}
         </Routes>

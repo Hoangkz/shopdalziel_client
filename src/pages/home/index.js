@@ -20,50 +20,54 @@ export default function Home(){
                 <Box w="75%"margin="auto" fontSize={14}>
                     <Flex justify={"space-between"} >
                         <List style={{"display":"flex"}} margin="0"padding={0}>
-                            <ListItem margin="8px" >
-                                <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Home</Link>
+                            <ListItem className="hoverOpacity" margin="8px" >
+                                <Link  to="/" style={{"textDecoration":"none","color":"#fff"}}>Home</Link>
                             </ListItem>
-                            <ListItem margin="8px">
+                            <ListItem className="hoverOpacity" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Tải ứng dụng</Link>
                             </ListItem>
-                            <ListItem marginX={6} marginY={8} color="#fff">
+                            <ListItem className="hoverOpacity" marginX={6} marginY={8} color="#fff">
                                 Kết nối 
                             </ListItem>
-                            <ListItem marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
+                            <ListItem className="hoverOpacity" marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}><Icon as={FaFacebook}/></Link>
                             </ListItem>
-                            <ListItem marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
+                            <ListItem className="hoverOpacity" marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}><Icon as={FaGoogle}/></Link>
                             </ListItem>
                         </List>
                         <List style={{"display":"flex"}} margin="0" padding={0}>
-                            <ListItem margin="8px">
+                            <ListItem className="hoverOpacity" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Thông báo</Link>
                             </ListItem>
-                            <ListItem margin="8px">
+                            <ListItem className="hoverOpacity" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Hỗ trợ</Link>
                             </ListItem>
-                            <ListItem margin="8px">
+                            <ListItem className="hoverOpacity" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng ký</Link>
                             </ListItem>
-                            <ListItem margin="8px">
+                            <ListItem className="hoverOpacity" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng nhập</Link>
                             </ListItem>
                         </List>
                     </Flex>
                 </Box>
-                <Box w="80%" margin="auto"pb={0}>
-                    <Flex justify={"space-between"}>
-                        <Box fontSize="2.5rem" color="#fff">
-                            <Icon as ={BsFillBagCheckFill} bg="" color="#fff"/>
-                            Dalziel
+                <Box w="80%" margin="auto"pb={4} mt="4px">
+                    <Flex justify={"space-around"}>
+                        <Box fontSize="2.5rem" color="#fff" className="hoverOpacity">
+                            <Link to={"/"} style={{"textDecoration":"none","color":"#fff"}} >
+                                <Icon as ={BsFillBagCheckFill} color="#fff"/>
+                                Dalziel
+                            </Link>
                         </Box>
                         <Box w="75%">
                             <Input onChange={handleChangeInput} w="75%" placeholder='Search' h={40}fontSize="1.1rem" borderRadius={6} outline="none" border={1}paddingX="8px"/>
                             <Button onClick={handleClick} className="buttonNavbar" mx={4} h={40} borderRadius={6} outline="none" border="1px solid #fff" color="#fff" paddingX="8px" background='transparent' >Search</Button>
                         </Box>
                         <Box fontSize="2.5rem" color="#fff">
-                            <Icon as ={AiOutlineShoppingCart}/>
+                            <Link to={"/"} style={{"textDecoration":"none","color":"#fff"}}className="hoverOpacity">
+                                <Icon as ={AiOutlineShoppingCart}/>
+                            </Link>
                         </Box>
                     </Flex>
                 </Box>

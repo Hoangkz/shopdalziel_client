@@ -55,8 +55,10 @@ export default function Home(){
                 <Box w="80%" margin="auto"pb={0}>
                     <Flex justify={"space-between"}>
                         <Box fontSize="2.5rem" color="#fff">
-                            <Icon as ={BsFillBagCheckFill} bg="" color="#fff"/>
-                            Dalziel
+                            <Link to={"/"}>
+                                <Icon as ={BsFillBagCheckFill} bg="" color="#fff"/>
+                                Dalziel
+                            </Link>
                         </Box>
                         <Box w="75%">
                             <Input onChange={handleChangeInput} w="75%" placeholder='Search' h={40}fontSize="1.1rem" borderRadius={6} outline="none" border={1}paddingX="8px"/>
