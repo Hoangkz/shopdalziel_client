@@ -1,12 +1,13 @@
 // Chakra imports
-import { Box} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 // Custom Chakra theme
 export default function Dashboard() {
 
   return (
-    <Box>
-      test
-    </Box>
+      <>
+        <div>item</div>
+        <Link to={"/"}>home</Link>
+      </>
   );
 }
