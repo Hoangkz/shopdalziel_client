@@ -6,7 +6,12 @@ import { BsFillBagCheckFill } from 'react-icons/bs'
 import { Link } from "react-router-dom";
 import './header.css';
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
 export default function Home(){
+    let isLogined = useSelector((state) => state.user.isLogined);
+    console.log(isLogined)
+    isLogined = true;
     const [search, setSearch] = useState();
     const handleChangeInput = (e) =>{
         setSearch(e.target.value);
@@ -43,12 +48,23 @@ export default function Home(){
                             <ListItem className="navItem" margin="8px">
                                 <a href="tel:0968823201" target={"_blank"} style={{"textDecoration":"none","color":"#fff"}}>Hỗ trợ</a>
                             </ListItem>
-                            <ListItem className="navItem" margin="8px">
-                                <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng ký</Link>
-                            </ListItem>
-                            <ListItem className="navItem" margin="8px">
-                                <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng nhập</Link>
-                            </ListItem>
+                            {!isLogined? (
+                                <ListItem className="navItem" margin="8px">
+                                    <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng ký</Link>
+                                </ListItem>
+                                ):(
+                                <ListItem className="navItem" margin="8px">
+                                </ListItem>)
+                            }
+                            {!isLogined? (
+                                <ListItem className="navItem" margin="8px">
+                                    <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng nhập</Link>
+                                </ListItem>
+                                ):(
+                                <ListItem className="navItem" margin="8px">
+                                    <Box style={{"textDecoration":"none","color":"#fff","fontWeight":"700"}}>UserName</Box>
+                                </ListItem>)
+                            }
                         </List>
                     </Flex>
                 </Box>
