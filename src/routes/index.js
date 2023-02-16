@@ -1,6 +1,7 @@
-import Home from "./pages/home";
-import Items from "./pages/items";
-import Footer from "./layout/footer";
+import Home from "../pages/home";
+import Items from "../pages/items";
+import Footer from "../layout/footer";
+import Listitem from "../pages/List-items";
 
 const publicRoutes =[
     {
@@ -14,6 +15,9 @@ const publicRoutes =[
     {
         path:"/footer",
         element:Footer,
+    },{
+        path:"/list-items/:slug",
+        element:Listitem,
     },
 ]
 
@@ -23,4 +27,4 @@ const privateRoutes =[
         element:Home,
     },
 ]
-export {publicRoutes,privateRoutes }
+export { publicRoutes, privateRoutes }

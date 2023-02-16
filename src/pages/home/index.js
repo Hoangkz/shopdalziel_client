@@ -11,10 +11,11 @@ export default function Home(){
 
     const [dataItem, setDataItem] = useState()
     const [currentPage, setCurrentPage] = useState(1);
-    function handlePageClick(selectedPage) {
+    const handlePageClick = (selectedPage)=>{
         console.log(selectedPage.selected+1)
         setCurrentPage(selectedPage.selected+1);
     }
+  
     useEffect(() => {
         (async () => {
           try {
@@ -25,7 +26,7 @@ export default function Home(){
           }
         })();
     },[currentPage]);
-    console.log(dataItem?.currentPage)
+    console.log(dataItem)
     return(
         <>
             <Header/>
@@ -38,10 +39,10 @@ export default function Home(){
                         {dataDanhMuc.map((item,index)=>{
                             return(
                                 <Box key={index} className="danhmuchover" border="1px solid rgba(0,0,0,.125)" w="124px" borderRadius="0.25rem">
-                                    <Link to={`/listItems/${item.desc}`}>
-                                        <Image src={item.img} w="124px"></Image>
+                                    <Link to={`/list-items/${item?.desc}`}>
+                                        <Image src={item?.img} w="124px"></Image>
                                         <Box className="col" w="124px" h={48} textAlign={"center"} color="black">
-                                            {item.desc}
+                                            {item?.desc}
                                         </Box>
                                     </Link>
                                 </Box>
@@ -60,7 +61,7 @@ export default function Home(){
                         {dataItem?.items.map((item,index)=>{
                             return(
                                 <Box m="0 2px" key={index} className="danhmuchover" border="1px solid rgba(0,0,0,.125)" w="135px" borderRadius="0.25rem">
-                                    <Link to={`/listItems/${item?.name}`}>
+                                    <Link to={`/items/${item?.name}`}>
                                         <Image src={item?.img} w="135px"></Image>
                                         <Box className="col" w="135px" h={48} textAlign={"center"} color="black">
                                             {item?.name}
@@ -74,22 +75,15 @@ export default function Home(){
                     <ReactPaginate
                         previousLabel={'<<'}
                         nextLabel={'>>'}
+                        breakLabel={"..."}
                         pageCount={dataItem?.pageLength}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={3}
                         onPageChange={handlePageClick}
-                        containerClassName={'pagination'}
-                        activeClassName={'active'}
-                        breakLabel="..."
-                        initialPage={0}
-                        pageClassName="page-item"
-                        pageLinkClassName="page-link"
-                        previousClassName="page-item"
-                        previousLinkClassName="page-link"
-                        nextClassName="page-item"
-                        nextLinkClassName="page-link"
-                        breakClassName="page-item"
-                        breakLinkClassName="page-link"
-                        renderOnZeroPageCount={null}
-                        forcePage={dataItem?.currentPage}
+                        containerClassName={"pagination"}
+                        pageClassName={"page-item"}
+                        pageLinkClassName={"page-link"}
+                        activeClassName={"active"}
                         />
                     </Flex>
                 </Box>
