@@ -4,6 +4,10 @@ const shopApi = {
   search(query) {
     const url = `/items/search?q=${query}`;
     return axiosClient.get(url);
+  },
+  home(page){
+    const url = `?page=${page}`;
+    return axiosClient.get(url);
   }
 };
 

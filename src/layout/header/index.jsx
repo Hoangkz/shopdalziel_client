@@ -1,4 +1,4 @@
-import { Box, Flex, List, ListItem, Icon, Input, Button } from "@chakra-ui/react";
+import { Box, Flex, List, ListItem, Icon, Input, Button, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel } from "@chakra-ui/react";
 import { FaFacebook, FaGoogle } from 'react-icons/fa'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { BsFillBagCheckFill } from 'react-icons/bs'
@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 export default function Home(){
     let isLogined = useSelector((state) => state.user.isLogined);
-    console.log(isLogined)
+    // console.log(isLogined)
     isLogined = true;
     const [search, setSearch] = useState();
     const handleChangeInput = (e) =>{
@@ -19,9 +19,10 @@ export default function Home(){
     const handleClick = () =>{
         console.log(search)
     }
+    let role =3;
     return (
-        <>
-            <Box background={"linear-gradient(0, #fe6433, #f53e2d);"}>
+        <>  
+            <Box position={"fixed"} w="100%"zIndex={1} background={"linear-gradient(0, #fe6433, #f53e2d);"}>
                 <Box w="75%"margin="auto" fontSize={14}>
                     <Flex justify={"space-between"} >
                         <List style={{"display":"flex"}} margin="0"padding={0}>
@@ -46,7 +47,7 @@ export default function Home(){
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Thông báo</Link>
                             </ListItem>
                             <ListItem className="navItem" margin="8px">
-                                <a href="tel:0968823201" target={"_blank"} style={{"textDecoration":"none","color":"#fff"}}>Hỗ trợ</a>
+                                <Link to="tel:0968823201" target={"_blank"} style={{"textDecoration":"none","color":"#fff"}}>Hỗ trợ</Link>
                             </ListItem>
                             {!isLogined? (
                                 <ListItem className="navItem" margin="8px">
@@ -61,8 +62,69 @@ export default function Home(){
                                     <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng nhập</Link>
                                 </ListItem>
                                 ):(
-                                <ListItem className="navItem" margin="8px">
-                                    <Box style={{"textDecoration":"none","color":"#fff","fontWeight":"700"}}>UserName</Box>
+                                <ListItem margin="8px" position={"relative"}>
+                                    <Accordion allowMultiple>
+                                        <AccordionItem>
+                                            <AccordionButton className="navItem" backgroundColor={"transparent"} border="none" fontSize={16} cursor="pointer">
+                                                <Box style={{"textDecoration":"none","color":"#fff","fontWeight":"700"}}>UserName</Box>
+                                                <AccordionIcon color={"#fff"} fontSize={18} />
+                                            </AccordionButton>
+                                            <AccordionPanel pb={4} w="200px" position={"absolute"} top="24px" right="-50%"zIndex={1} backgroundColor={"#fff"}> 
+                                                <List p={0}>
+                                                    <ListItem className="navItem_hover">
+                                                        <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                            Tài khoản
+                                                        </Link>
+                                                    </ListItem> 
+                                                    {role===1?(
+                                                        <>
+                                                            <ListItem className="navItem_hover">
+                                                                <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                                    Giỏ hàng của tôi
+                                                                </Link>
+                                                            </ListItem>
+                                                            <ListItem className="navItem_hover">
+                                                                <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                                    Đơn hàng của tôi
+                                                                </Link>
+                                                            </ListItem>
+                                                        </>
+                                                    ):role===2?(
+                                                        <ListItem className="navItem_hover">
+                                                            <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                                Quản lý đơn hàng
+                                                            </Link>
+                                                        </ListItem>
+                                                    ):role===3?(
+                                                        <>
+                                                            <ListItem className="navItem_hover">
+                                                                <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                                    Quản lý đơn hàng
+                                                                </Link>
+                                                            </ListItem>
+                                                            <ListItem className="navItem_hover">
+                                                                <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                                    Danh sách Account
+                                                                </Link>
+                                                            </ListItem>
+                                                            <ListItem className="navItem_hover">
+                                                                <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                                    Danh sách sản phẩm
+                                                                </Link>
+                                                            </ListItem>
+                                                        </>
+                                                    ):(null)}
+
+
+                                                    <ListItem className="navItem_hover">
+                                                        <Link to="/" style={{"display":"block","padding":"8px 20px","color":"black","fontSize":"1rem"}}>
+                                                            Đăng xuất
+                                                        </Link>
+                                                    </ListItem>
+                                                </List>
+                                            </AccordionPanel>
+                                        </AccordionItem>
+                                    </Accordion>
                                 </ListItem>)
                             }
                         </List>

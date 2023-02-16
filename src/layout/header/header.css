@@ -7,3 +7,6 @@
     opacity: 0.8;
     cursor: pointer;
 }
+.navItem_hover:hover{
+    background-color: #ebebeb;
+}
