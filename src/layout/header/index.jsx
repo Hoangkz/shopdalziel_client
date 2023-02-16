@@ -9,9 +9,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Home(){
-    let isLogined = useSelector((state) => state.user.isLogined);
+    const isLogined = useSelector((state) => state.user.isLogined);
     // console.log(isLogined)
-    isLogined = true;
     const [search, setSearch] = useState();
     const handleChangeInput = (e) =>{
         setSearch(e.target.value);
@@ -19,7 +18,7 @@ export default function Home(){
     const handleClick = () =>{
         console.log(search)
     }
-    let role =3;
+    const role =3;
     return (
         <>  
             <Box position={"fixed"} w="100%"zIndex={1} background={"linear-gradient(0, #fe6433, #f53e2d);"}>
@@ -134,13 +133,13 @@ export default function Home(){
                     <Flex justify={"space-between"}>
                         <Box fontSize="2.5rem" color="#fff" >
                             <Link to={"/"} style={{"color":"#fff"}} className="navItem">
-                                <Icon as ={BsFillBagCheckFill} bg="" color="#fff"/>
+                                <Icon as ={BsFillBagCheckFill}mt="-15px" bg="" color="#fff"/>
                                 Dalziel
                             </Link>
                         </Box>
                         <Box w="75%">
-                            <Input onChange={handleChangeInput} w="75%" placeholder='Search' h={40}fontSize="1.1rem" borderRadius={6} outline="none" border={1}paddingX="8px"/>
-                            <Button onClick={handleClick} className="buttonNavbar" mx={4} h={40} borderRadius={6} outline="none" border="1px solid #fff" color="#fff" paddingX="8px" background='transparent' >Search</Button>
+                            <Input onChange={handleChangeInput} w="75%" placeholder='Search'h={40}fontSize="1.1rem" borderRadius={6} outline="none" border={4}paddingX="8px"/>
+                            <Button onClick={handleClick} className="buttonNavbar" mx={4} mb={6} h={40} borderRadius={6} outline="none" border="1px solid #fff" color="#fff" paddingX="8px" background='transparent' >Search</Button>
                         </Box>
                         <Box fontSize="2.5rem" color="#fff" className="navItem">
                             <Icon as ={AiOutlineShoppingCart}/>
