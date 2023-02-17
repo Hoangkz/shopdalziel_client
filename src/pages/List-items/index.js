@@ -36,7 +36,7 @@ export default function ListItems(){
                 <Box maxW="80%" mx={"auto"}>
                     <Flex>
                         <Box mb={4} >
-                            <Link className="homeItem" to="/" style={{"color":"#f53e2d","marginLeft":"12px","fontSize":"18px"}}>Home</Link>
+                            <Link className="homeItem" to="/" style={{"color":"#fe6433","marginLeft":"12px","fontSize":"16px"}}>Home</Link>
                         </Box>
                         <Box>
                             <Icon as={AiOutlineRight}/>

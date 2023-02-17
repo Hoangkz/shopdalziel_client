@@ -15,9 +15,14 @@ const publicRoutes =[
     {
         path:"/footer",
         element:Footer,
-    },{
+    },
+    {
         path:"/list-items/:slug",
         element:Listitem,
+    },
+    {
+        path:"/items/:slug",
+        element:Items,
     },
 ]
 

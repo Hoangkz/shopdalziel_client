@@ -31,13 +31,13 @@ export default function Home(){
                             <ListItem className="navItem" margin="8px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Tải ứng dụng</Link>
                             </ListItem>
-                            <ListItem marginX={6} marginY={8} color="#fff" cursor={"inherit"}>
+                            <ListItem  margin="8px" color="#fff" cursor={"inherit"}>
                                 Kết nối 
                             </ListItem>
-                            <ListItem className="navItem" marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
+                            <ListItem className="navItem" color="#fff" fontSize="20px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}><Icon as={FaFacebook}/></Link>
                             </ListItem>
-                            <ListItem className="navItem" marginX={1} marginY={8} color="#fff" marginTop={8} fontSize="18px">
+                            <ListItem className="navItem" color="#fff" fontSize="20px">
                                 <Link to="/" style={{"textDecoration":"none","color":"#fff"}}><Icon as={FaGoogle}/></Link>
                             </ListItem>
                         </List>
@@ -129,7 +129,7 @@ export default function Home(){
                         </List>
                     </Flex>
                 </Box>
-                <Box w="80%" margin="auto" mt={10} pb={0}>
+                <Box w="80%" margin="auto" mt={4} pb={0}>
                     <Flex justify={"space-between"}>
                         <Box fontSize="2.5rem" color="#fff" >
                             <Link to={"/"} style={{"color":"#fff"}} className="navItem">
@@ -138,8 +138,8 @@ export default function Home(){
                             </Link>
                         </Box>
                         <Box w="75%">
-                            <Input onChange={handleChangeInput} w="75%" placeholder='Search'h={40}fontSize="1.1rem" borderRadius={6} outline="none" border={4}paddingX="8px"/>
-                            <Button onClick={handleClick} className="buttonNavbar" mx={4} mb={6} h={40} borderRadius={6} outline="none" border="1px solid #fff" color="#fff" paddingX="8px" background='transparent' >Search</Button>
+                            <Input onChange={handleChangeInput} w="75%" placeholder='Search'outline="none" backgroundColor={"#fff"}/>
+                            <Button onClick={handleClick} className="buttonNavbar" mx={4} mb={2} borderRadius={6} outline="none" border="1px solid #fff" color="#fff" paddingX="8px" background='transparent' >Search</Button>
                         </Box>
                         <Box fontSize="2.5rem" color="#fff" className="navItem">
                             <Icon as ={AiOutlineShoppingCart}/>

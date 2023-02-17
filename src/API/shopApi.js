@@ -12,6 +12,10 @@ const shopApi = {
   loaiItems(slug,page){
     const url = `/items/${slug}/show?page=${page}`;
     return axiosClient.get(url);
+  },
+  showItems(slug){
+    const url = `/items/${slug}`;
+    return axiosClient.get(url);
   }
 };
 
