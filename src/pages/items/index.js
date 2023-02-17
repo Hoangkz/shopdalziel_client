@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Icon, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Button } from "@chakra-ui/react";
+import { Box, Flex, Image, Icon, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Button, Stack } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../../layout/header";
 import Footer from "../../layout/footer";
@@ -34,7 +34,7 @@ export default function ListItems() {
             <Box backgroundColor="antiquewhite" pt={150} pb="50px">
                 <Box maxW="80%" mx={"auto"}>
                     <Flex>
-                        <Box mb={4} >
+                        <Box >
                             <Link className="homeItem" to="/" style={{ "color": "#fe6433", "marginLeft": "12px", "fontSize": "16px" }}>Home</Link>
                         </Box>
                         <Box>
@@ -42,7 +42,7 @@ export default function ListItems() {
                         </Box>
                         {dataItem?.item?.loai ?
                             <>
-                                <Box mb={4} >
+                                <Box>
                                     <Link className="homeItem" to={`/list-items/${dataItem?.item?.loai}`} style={{ "color": "#fe6433", "fontSize": "16px" }}>{dataItem?.item?.loai}</Link>
                                 </Box>
                                 <Box>
@@ -50,7 +50,7 @@ export default function ListItems() {
                                 </Box>
                             </> : (null)
                         }
-                        <Box mt={1}>
+                        <Box>
                             {dataItem?.item?.name ? dataItem?.item?.name : (slug)}
                         </Box>
                     </Flex>
@@ -87,7 +87,7 @@ export default function ListItems() {
                                         </Box>
                                     </Box>
                                     <Box w="55%" backgroundColor="rgb(255, 250, 250)" minW={400}>
-                                        <Box m={24} >
+                                        <Box m={"12px 24px"} >
                                             <Text textAlign={"center"} fontSize="2rem" fontWeight={500}>
                                                 {dataItem?.item?.name}
                                             </Text>
@@ -101,29 +101,27 @@ export default function ListItems() {
                                             </Flex>
                                             <Flex>
                                                 <Box m="8px 32px 16px 0">Vân chuyển</Box>
-                                                <Box mt={6} fontSize="1.25rem" lineHeight={1.2}>??</Box>
+                                                <Box mt={2} fontSize="1.2rem" lineHeight={1.1}>??</Box>
                                             </Flex>
                                             <Flex>
                                                 <Box m="8px 32px 16px 0">Số lượng</Box>
-                                                <NumberInput size='lg' maxW={40} defaultValue={1} min={0} max={dataItem?.item?.soluong}>
-                                                    <NumberInputField textAlign={"center"} />
-                                                    <NumberInputStepper right={"-20px"} top="-2px">
-                                                        <Box>
+                                                <Stack shouldWrapChildren direction='row'>
+                                                    <NumberInput size='md' maxW={20} defaultValue={1} min={0} max={dataItem?.item?.soluong}>
+                                                        <NumberInputField />
+                                                        <NumberInputStepper>
                                                             <NumberIncrementStepper />
-                                                        </Box>
-                                                        <Box>
                                                             <NumberDecrementStepper />
-                                                        </Box>
-                                                    </NumberInputStepper>
-                                                </NumberInput>
-                                                <Box ml="24px" mt={6} fontWeight={350}>{dataItem?.item?.soluong} Sản phẩm có sẵn</Box>
+                                                        </NumberInputStepper>
+                                                    </NumberInput>
+                                                </Stack>
+                                                <Box ml="24px" mt={4} fontWeight={350}>{dataItem?.item?.soluong} Sản phẩm có sẵn</Box>
                                             </Flex>
-                                            <Flex>
+                                            <Flex mt={2}>
                                                 <Box m="8px 32px 16px 0">Phí ship</Box>
                                                 <Box color="#28a745" fontSize="1.75rem" fontWeight={600} lineHeight={1.2}>Miễn phí</Box>
                                             </Flex>
                                             <Flex>
-                                                <Button colorScheme='teal' size='lg'p={"8px 12px"}>
+                                                <Button colorScheme='teal' size='lg' p={"8px 12px"}>
                                                     Thêm vào giỏ hàng
                                                 </Button>
                                             </Flex>

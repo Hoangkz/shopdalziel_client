@@ -30,7 +30,7 @@ export default function Home(){
     return(
         <>
             <Header/>
-            <Box backgroundColor="antiquewhite" pt={150} >
+            <Box backgroundColor="antiquewhite" pt={200} >
                 <Box backgroundColor="#fff" maxW="80%" mx={"auto"}>
                     <Box color="rgb(149, 147, 147);">
                         <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px" m={0}>DANH MỤC</Heading>
@@ -41,7 +41,7 @@ export default function Home(){
                                 <Box key={index} className="danhmuchover" border="1px solid rgba(0,0,0,.125)" w="126px" borderRadius="0.25rem">
                                     <Link to={`/list-items/${item?.desc}`}>
                                         <Image src={item?.img} w="124px"></Image>
-                                        <Box className="col" w="124px" h={48} textAlign={"center"} color="black">
+                                        <Box className="col" w="124px"textAlign={"center"} color="black">
                                             {item?.desc}
                                         </Box>
                                     </Link>
@@ -67,7 +67,7 @@ export default function Home(){
                                             <Box m="0 2px" key={index} className="danhmuchover" border="1px solid rgba(0,0,0,.125)" w="135px" borderRadius="0.25rem">
                                                 <Link to={`/items/${item?.name}`}>
                                                     <Image border="1px solid #ccc" src={item?.img} minH="135px" minW="135px" w="135px" alt={item?.name}></Image>
-                                                    <Box mt={8} className="col" w="135px" h={48} textAlign={"center"} color="black">
+                                                    <Box mt={8} className="col" w="135px" textAlign={"center"} color="black">
                                                         {item?.name}
                                                     </Box>
                                                 </Link>
