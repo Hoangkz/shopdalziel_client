@@ -139,7 +139,7 @@ export default function Home(){
                         </Box>
                         <Box w="75%">
                             <Input onChange={handleChangeInput} w="75%" placeholder='Search'outline="none" backgroundColor={"#fff"}/>
-                            <Button onClick={handleClick} mx={4} mb={2} borderRadius={6} color='#fff' variant='outline' _hover={{"backgroundColor":"#f53e2d"}}>Search</Button>
+                            <Button onClick={handleClick} mx={4} mb={2} borderRadius={6} backgroundColor="transparent" color='#fff' variant='outline' _hover={{"backgroundColor":"#f53e2d"}}>Search</Button>
                         </Box>
                         <Box fontSize="2.5rem" color="#fff" className="navItem">
                             <Icon as ={AiOutlineShoppingCart}/>

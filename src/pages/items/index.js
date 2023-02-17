@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Icon, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Button, Stack } from "@chakra-ui/react";
+import { Box, Flex, Image, Icon, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Button, Stack, useDisclosure } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../../layout/header";
 import Footer from "../../layout/footer";
@@ -7,6 +7,8 @@ import "./item.css";
 import { useEffect, useState } from "react";
 import shopApi from "../../API/shopApi";
 import { BsFacebook, BsInstagram, BsMessenger, BsTwitter } from "react-icons/bs";
+import ModalAddItems from "./modal_add_items"
+import ModalBuyItems from "./modal_buy_items"
 export default function ListItems() {
     const { slug } = useParams();
     const [dataItem, setDataItem] = useState()
@@ -120,10 +122,11 @@ export default function ListItems() {
                                                 <Box m="8px 32px 16px 0">Phí ship</Box>
                                                 <Box color="#28a745" fontSize="1.75rem" fontWeight={600} lineHeight={1.2}>Miễn phí</Box>
                                             </Flex>
-                                            <Flex>
-                                                <Button colorScheme='teal' size='lg' p={"8px 12px"}>
-                                                    Thêm vào giỏ hàng
-                                                </Button>
+                                            <Flex my={4}>
+                                                <ModalAddItems/>
+                                                <Box m={"0 8px"}></Box>
+                                                <ModalBuyItems/>
+
                                             </Flex>
                                         </Box>
                                     </Box>

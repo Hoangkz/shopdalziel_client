@@ -2,6 +2,7 @@ import Home from "../pages/home";
 import Items from "../pages/items";
 import Footer from "../layout/footer";
 import Listitem from "../pages/List-items";
+import Search from "../pages/search";
 
 const publicRoutes =[
     {
@@ -21,8 +22,8 @@ const publicRoutes =[
         element:Listitem,
     },
     {
-        path:"/items/:slug",
-        element:Items,
+        path:"/search",
+        element:Search,
     },
 ]
 
