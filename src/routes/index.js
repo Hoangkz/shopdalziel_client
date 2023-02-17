@@ -5,6 +5,7 @@ import Listitem from "../pages/List-items";
 import Search from "../pages/search";
 
 const publicRoutes =[
+    //thêm layout để có layout riêng
     {
         path:"/",
         element:Home,
