@@ -29,8 +29,7 @@ export default function Home(){
     console.log(dataItem?.currentPage > dataItem?.pageLength)
     return(
         <>
-            <Header/>
-            <Box backgroundColor="antiquewhite" pt={200} >
+            <Box pt={5}>
                 <Box backgroundColor="#fff" maxW="80%" mx={"auto"}>
                     <Box color="rgb(149, 147, 147);">
                         <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px" m={0}>DANH MỤC</Heading>
@@ -121,9 +120,6 @@ export default function Home(){
                     
                 </Box>
             </Box>
-
-            <Box backgroundColor="antiquewhite" pt={50} ></Box>
-            <Footer/>
         </>
     )
 }

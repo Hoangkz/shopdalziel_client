@@ -8,7 +8,7 @@ import './header.css';
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function Home(){
+export default function Header(){
     const isLogined = useSelector((state) => state.user.isLogined);
     // console.log(isLogined)
     const [search, setSearch] = useState();

@@ -10,7 +10,7 @@ const publicRoutes =[
         element:Home,
     },
     {
-        path:"/items",
+        path:"/items/:slug",
         element:Items,
     },
     {

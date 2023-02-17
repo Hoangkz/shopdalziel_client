@@ -1,7 +1,5 @@
 import { Box, Flex, Image, Icon, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Button, Stack, useDisclosure } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
-import Header from "../../layout/header";
-import Footer from "../../layout/footer";
 import { AiFillLike, AiOutlineRight } from "react-icons/ai";
 import "./item.css";
 import { useEffect, useState } from "react";
@@ -32,8 +30,7 @@ export default function ListItems() {
 
     return (
         <>
-            <Header />
-            <Box backgroundColor="antiquewhite" pt={150} pb="50px">
+            <Box>
                 <Box maxW="80%" mx={"auto"}>
                     <Flex>
                         <Box >
@@ -141,7 +138,6 @@ export default function ListItems() {
                     </Box>
                 </Box>
             </Box>
-            <Footer />
         </>
     )
 }
