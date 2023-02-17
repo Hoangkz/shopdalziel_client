@@ -1,5 +1,3 @@
-import Header from "../../layout/header";
-import Footer from "../../layout/footer";
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import dataDanhMuc  from "../../layout/danh_muc_sp";
 import { Link } from "react-router-dom";

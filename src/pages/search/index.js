@@ -1,7 +1,5 @@
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
-import Header from "../../layout/header";
-import Footer from "../../layout/footer";
 import "./search.css";
 import { useEffect, useState } from "react";
 import shopApi from "../../API/shopApi";
@@ -30,8 +28,7 @@ export default function ListItems(props){
 
     return(
         <>  
-            <Header/>
-            <Box backgroundColor="antiquewhite" pt={150} pb="50px">
+            <Box>
                 <Box maxW="80%" mx={"auto"}>
                     <Box backgroundColor="#fff">
                         <Box color="rgb(149, 147, 147);">
@@ -90,7 +87,6 @@ export default function ListItems(props){
                     </Box>
                 </Box>
             </Box>
-            <Footer/>
         </>
     )
 }
