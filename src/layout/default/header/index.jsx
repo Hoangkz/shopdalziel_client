@@ -18,14 +18,11 @@ import { BsFillBagCheckFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../../features/userSlice";
-import { useEffect } from "react";
-import { addtoAction } from "../../../redux/actions";
+import { searchHeaderAction } from "../../../redux/actions";
 
 export default function Header() {
-  // const isLogined = useSelector((state) => state.user.isLogined);
-  // console.log(isLogined)
   let isLogined =false
   const [search, setSearch] = useState();
   const handleChangeInput = (e) => {
@@ -39,7 +36,7 @@ export default function Header() {
   };
 
   const handleClickButton = (e) => {
-    dispatch(addtoAction({search:search}));
+    dispatch(searchHeaderAction({search:search}));
     navigate("/search")
 
   }
