@@ -2,8 +2,8 @@ import Home from "../pages/home";
 import Items from "../pages/items";
 import Listitem from "../pages/List-items";
 import Search from "../pages/search";
-import Login from "../layout/auth/Login";
-import SignUp from "../layout/auth/SignUp";
+import Login from "../pages/auth/Login";
+import SignUp from "../pages/auth/SignUp";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
