@@ -40,18 +40,16 @@ export default function SignUp() {
         authApi.login(formData)
         .then(response => {
             toast.success(response.data.message);
-            // navigate('/auth/login');
             const token = response.data.token;
             localStorage.setItem("token", token);
             const decoded = jwt_decode(token);
             console.log(decoded);
-            // localStorage.setItem("user", JSON.stringify(decoded.user));
+            localStorage.setItem("user", JSON.stringify(decoded.data));
+            navigate('/');
         })
         .catch(error => {
             toast.error(error.response.data.message);
         })
-        console.log(formUserName)
-        console.log(formPassword)
     }
 
     return (

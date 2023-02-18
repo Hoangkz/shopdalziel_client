@@ -25,9 +25,6 @@ export default function ListItems() {
             }
         })();
     }, []);
-
-    console.log(dataItem)
-
     return (
         <>
             <Box>

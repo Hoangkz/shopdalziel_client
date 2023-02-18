@@ -37,7 +37,9 @@ export const updateUserInfo = createAsyncThunk(
     }
   }
 );
-
+export const logout2 = () => ({
+  type: 'LOGOUT',
+});
 export const userSlice = createSlice({
   name: "user",
   initialState: {

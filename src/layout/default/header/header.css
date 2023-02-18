@@ -10,3 +10,7 @@
 .navItem_hover:hover{
     background-color: #ebebeb;
 }
+
+.navItem_hover>a>header{
+    padding: 9px 18px;
+}

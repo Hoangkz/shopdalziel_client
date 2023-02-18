@@ -23,9 +23,6 @@ export default function ListItems(){
           }
         })();
     },[slug,currentPage]);
-
-    console.log(dataItem)
-
     return(
         <>  
             <Box>

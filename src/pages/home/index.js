@@ -10,7 +10,6 @@ export default function Home(){
     const [dataItem, setDataItem] = useState()
     const [currentPage, setCurrentPage] = useState(1);
     const handlePageClick = (selectedPage)=>{
-        console.log(selectedPage.selected+1)
         setCurrentPage(selectedPage.selected+1);
     }
   
@@ -24,7 +23,6 @@ export default function Home(){
           }
         })();
     },[currentPage]);
-    console.log(dataItem?.currentPage > dataItem?.pageLength)
     return(
         <>
             <Box pt={5}>

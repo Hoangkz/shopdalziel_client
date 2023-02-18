@@ -24,9 +24,6 @@ export default function ListItems(){
           }
         })();
     },[currentPage]);
-
-    console.log(dataItem)
-
     return(
         <>  
             <Box maxW="80%" mx={"auto"}>
