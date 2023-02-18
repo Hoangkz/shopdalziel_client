@@ -19,7 +19,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../../features/userSlice";
 import { searchHeaderAction } from "../../../redux/actions";
 
 export default function Header() {
@@ -32,7 +31,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleClickLogOut = (e) => {
-    dispatch(logout());
+    
   };
 
   const handleClickButton = (e) => {
