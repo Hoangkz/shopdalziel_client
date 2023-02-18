@@ -4,7 +4,7 @@ import "./search.css";
 import { useEffect, useState } from "react";
 import shopApi from "../../API/shopApi";
 import ReactPaginate from "react-paginate";
-export default function ListItems(props){
+export default function ListItems(){
     const { slug } = useParams();
     const [dataItem, setDataItem] = useState()
 
@@ -16,13 +16,13 @@ export default function ListItems(props){
     useEffect(() => {
         (async () => {
           try {
-            const res = await shopApi.loaiItems(slug,currentPage);
+            const res = await shopApi.search(slug,currentPage);
             setDataItem(res.data);
           } catch (error) {
             console.log(error);
           }
         })();
-    },[currentPage]);
+    },[slug,currentPage]);
 
     console.log(dataItem)
 

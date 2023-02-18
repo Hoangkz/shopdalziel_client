@@ -138,8 +138,12 @@ export default function Header(){
                             </Link>
                         </Box>
                         <Box w="75%">
-                            <Input onChange={handleChangeInput} w="75%" placeholder='Search'outline="none" backgroundColor={"#fff"}/>
-                            <Button onClick={handleClick} mx={4} mb={2} borderRadius={6} backgroundColor="transparent" color='#fff' variant='outline' _hover={{"backgroundColor":"#f53e2d"}}>Search</Button>
+                            <Flex>
+                                <Input onChange={handleChangeInput} w="75%" placeholder='Search'outline="none" backgroundColor={"#fff"}/>
+                                <Link to={search?`/search/${search}`:null}>
+                                    <Button onClick={handleClick} mx={4} backgroundColor="transparent" color='#fff' variant='outline' _hover={{"backgroundColor":"#f53e2d"}}>Search</Button>
+                                </Link>
+                            </Flex>
                         </Box>
                         <Box fontSize="2.5rem" color="#fff" className="navItem">
                             <Icon as ={AiOutlineShoppingCart}/>

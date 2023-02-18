@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Icon, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Button, Stack, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Image, Icon, Text, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { AiFillLike, AiOutlineRight } from "react-icons/ai";
 import "./item.css";
@@ -66,18 +66,18 @@ export default function ListItems() {
                                         <Box mt="-30px" textAlign={"center"} mb="50px">
                                             <Flex textAlign={"center"} alignItems="center" justify={"center"}>
                                                 <Box fontWeight={500}>Chia sẻ :</Box>
-                                                <a href="https://www.facebook.com/messages" target={"_blank"}>
+                                                <Link to="https://www.facebook.com/messages" rel="noreferrer">
                                                     <Icon fontSize={24} m="0 6px" mt="-10px" color="blue" as={BsFacebook} />
-                                                </a>
-                                                <a href="https://www.facebook.com" target={"_blank"}>
+                                                </Link>
+                                                <Link to="https://www.facebook.com" rel="noreferrer">
                                                     <Icon fontSize={24} m="0 6px" mt="-10px" color="blue" as={BsMessenger} />
-                                                </a>
-                                                <a href="https://www.instagram.com/" target={"_blank"}>
+                                                </Link>
+                                                <Link to="https://www.instagram.com/" rel="noreferrer">
                                                     <Icon fontSize={24} m="0 6px" mt="-10px" color="red" as={BsInstagram} />
-                                                </a>
-                                                <a href="https://twitter.com" target={"_blank"}>
+                                                </Link>
+                                                <Link to="https://twitter.com" rel="noreferrer">
                                                     <Icon fontSize={24} m="0 6px" mt="-10px" color="#007bff" as={BsTwitter} />
-                                                </a>
+                                                </Link>
                                                 <Box onClick={toggleClass} cursor={"pointer"} m="0 12px">
                                                     <Icon fontSize={24} m="0 6px" mt="-10px" className={isActive ? 'colorBlue' : (null)} color={"#bdb8b8"} as={AiFillLike} />
                                                     <span fontWeight={500} fontSize="1.3rem" color={"Black"}>Like</span>

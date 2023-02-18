@@ -18,7 +18,7 @@ const publicRoutes =[
         element:Listitem,
     },
     {
-        path:"/search",
+        path:"/search/:slug",
         element:Search,
     },
 ]
