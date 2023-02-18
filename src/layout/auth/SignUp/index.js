@@ -1,16 +1,20 @@
 import { Box, Button, Flex, Icon, Input, Text } from "@chakra-ui/react";
 import { AiFillFacebook, AiOutlineShoppingCart } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../auth.css"
 import { useState, startTransition, useEffect } from "react";
+import authApi from "../../../API/authApi";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
-    const handleClickGoBack=()=> {
+    const handleClickGoBack = () => {
         startTransition(() => {
             window.history.back();
         });
     }
+    const navigate = useNavigate();
+
     const [formUserName, setFormUserName] = useState("");
     const [formPassword, setFormPassword] = useState("");
     const [formPasswordComfirm, setFormPasswordComfirm] = useState("");
@@ -51,42 +55,50 @@ export default function SignUp() {
         }
     }
 
-    useEffect(()=>{
-        if(formPassword!==formPasswordComfirm){
+    useEffect(() => {
+        if (formPassword !== formPasswordComfirm) {
             setCheckPasswordForm(true)
         }
-        else{
+        else {
             setCheckPasswordForm(false)
         }
-    },[formPassword,formPasswordComfirm])
+    }, [formPassword, formPasswordComfirm])
 
     const handleSubmitForm = (e) => {
         e.preventDefault(); // Ngăn chặn sự kiện submit mặc định của form
         // Xử lý logic đăng ký ở đây
-        console.log(formUserName)
-        console.log(formPassword)
-        console.log(formUserName.length)
-        if(formUserName.length>=5&&formPassword.length>=5&&formPasswordComfirm===formPassword) {
-            console.log("ok")
+        if (formUserName.length >= 5 && formPassword.length >= 5 && formPasswordComfirm === formPassword) {
+            const formData = new FormData();
+            formData.append('username', formUserName);
+            formData.append('password', formPassword);
+            authApi.signup(formData)
+            .then(response => {
+                toast.success(response.data.message);
+                navigate('/auth/login');
+            })
+            .catch(error => {
+                toast.error(error.response.data.message);
+            })
         }
     };
 
-    
-    
+
+
     return (
         <>
             <Box boxSizing="inherit">
-                <Flex position={"fixed"} top="0"left="0"bottom="0"right="0" backgroundColor={'antiquewhite'} >
+
+                <Flex position={"fixed"} top="0" left="0" bottom="0" right="0" backgroundColor={'antiquewhite'} >
                     <Box zIndex={"-1"} position={"absolute"} w="100%" h={"100%"} backgroundColor="rgba(0,0,0,0.1)" >
 
                     </Box>
-                    <Box m={"auto"}backgroundColor="#fff"borderRadius={6}>
+                    <Box m={"auto"} backgroundColor="#fff" borderRadius={6}>
                         <form onSubmit={handleSubmitForm}>
-                            <Box width={400}margin="32px auto">
+                            <Box width={400} margin="32px auto">
                                 <Box>
                                     <Link to={"/"}>
                                         <Box textAlign={"center"}>
-                                            <Icon fontSize="50px" color={"#fe6433"} as={AiOutlineShoppingCart}/>
+                                            <Icon fontSize="50px" color={"#fe6433"} as={AiOutlineShoppingCart} />
                                             <Box color={"#fe6433"} fontSize="24px" fontWeight="700" mt={"-4px"}>
                                                 Dalziel
                                             </Box>
@@ -98,7 +110,7 @@ export default function SignUp() {
                                         <Box fontWeight={600} fontSize="18px">
                                             Đăng ký
                                         </Box>
-                                        <Box _hover={{"opacity":'0.6'}}>
+                                        <Box _hover={{ "opacity": '0.6' }}>
                                             <Link to={"/auth/login"}>
                                                 <Box fontWeight={700} fontSize="15px" color={"#ea4d2d"}>
                                                     Đăng nhập
@@ -109,29 +121,29 @@ export default function SignUp() {
                                 </Box>
                                 <Box>
                                     <Box m={"24px 0"} position="relative">
-                                        <Input onChange={handleChangeFormUserName} placeholder="Email/Số điện thoại" border={"2px solid #ccc"}/>
-                                        {userNameError && <span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Tài khoản phải có ít nhất 5 ký tự!</span>}
+                                        <Input onChange={handleChangeFormUserName} placeholder="Email/Số điện thoại" border={"2px solid #ccc"} />
+                                        {userNameError && <span style={{ color: 'red', fontSize: "13px", position: "absolute", bottom: "-20px", left: "1px" }}>Tài khoản phải có ít nhất 5 ký tự!</span>}
                                     </Box>
                                     <Box m={"24px 0"} position="relative">
-                                        <Input onChange={handleChangeFormPassword} placeholder="Mật khẩu" type={"password"} border={"2px solid #ccc"}/>
-                                        {passwordError && <span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Mật khẩu phải có ít nhất 5 ký tự!</span>}
+                                        <Input onChange={handleChangeFormPassword} placeholder="Mật khẩu" type={"password"} border={"2px solid #ccc"} />
+                                        {passwordError && <span style={{ color: 'red', fontSize: "13px", position: "absolute", bottom: "-20px", left: "1px" }}>Mật khẩu phải có ít nhất 5 ký tự!</span>}
                                     </Box>
                                     <Box m={"24px 0"} position="relative">
-                                        <Input onChange={handleChangeFormPasswordComfirm} placeholder="Nhập lại mật khẩu" type={"password"} border={"2px solid #ccc"}/>
-                                        {passwordComfirmError && <span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Mật khẩu phải có ít nhất 5 ký tự!</span>}
-                                        {(checkPasswordForm&&!passwordComfirmError)&&<span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Mật khẩu và mật khẩu nhập lại không giống nhau!</span>}
+                                        <Input onChange={handleChangeFormPasswordComfirm} placeholder="Nhập lại mật khẩu" type={"password"} border={"2px solid #ccc"} />
+                                        {passwordComfirmError && <span style={{ color: 'red', fontSize: "13px", position: "absolute", bottom: "-20px", left: "1px" }}>Mật khẩu phải có ít nhất 5 ký tự!</span>}
+                                        {(checkPasswordForm && !passwordComfirmError) && <span style={{ color: 'red', fontSize: "13px", position: "absolute", bottom: "-20px", left: "1px" }}>Mật khẩu và mật khẩu nhập lại không giống nhau!</span>}
                                     </Box>
                                 </Box>
                                 <Box fontSize="12px" textAlign={"center"} color={"black"}>
                                     <span>
-                                        Bằng việc đăng ký, bạn đã đồng ý với Dalziel về 
+                                        Bằng việc đăng ký, bạn đã đồng ý với Dalziel về
                                     </span>
-                                    <Link to={"/"} style={{'margin':"0 2px","color":"#ea4d2d","fontWeight":"700"}} className="linkSupport">
+                                    <Link to={"/"} style={{ 'margin': "0 2px", "color": "#ea4d2d", "fontWeight": "700" }} className="linkSupport">
                                         Điều khoản dịch vụ
                                     </Link>
                                     <span>&</span>
                                     <Text>
-                                        <Link className="linkSupport" to={"/"} style={{'margin':"0 2px","color":"#ea4d2d","fontWeight":"700"}}>
+                                        <Link className="linkSupport" to={"/"} style={{ 'margin': "0 2px", "color": "#ea4d2d", "fontWeight": "700" }}>
                                             Chính cách bảo mật
                                         </Link>
                                     </Text>
@@ -141,7 +153,7 @@ export default function SignUp() {
                                         Trở lại
                                     </Button>
                                     <Box m={2}></Box>
-                                    <Button type="submit" w={140} backgroundColor="#ea4d2d" color={"#fff"} _hover={{"opacity":"0.7"}} size='md' >
+                                    <Button type="submit" w={140} backgroundColor="#ea4d2d" color={"#fff"} _hover={{ "opacity": "0.7" }} size='md' >
                                         Đăng ký
                                     </Button>
                                 </Flex>
@@ -149,11 +161,11 @@ export default function SignUp() {
                             <Box p={"8px 45px"} w="500px" backgroundColor={"#f5f5f5"} borderRadius={6}>
                                 <Flex justify={"space-between"} boxSizing="revert" p={"4px 12px"}>
                                     <Box fontWeight={490} bg={"#3a5a98"} color="#fff" fontSize={12} p={"4px 16px"} borderRadius={4}>
-                                        <Icon as={AiFillFacebook} fontSize="20px"margin="2px 4px 4px"/>
+                                        <Icon as={AiFillFacebook} fontSize="20px" margin="2px 4px 4px" />
                                         Kết nối với Facebook
                                     </Box>
                                     <Box fontWeight={490} bg={"yellow"} color="black" fontSize={12} p={"4px 16px"} borderRadius={4}>
-                                        <Icon as={FcGoogle} fontSize="20px"margin="2px 4px 4px"/>
+                                        <Icon as={FcGoogle} fontSize="20px" margin="2px 4px 4px" />
                                         Kết nối với Google
                                     </Box>
                                 </Flex>
