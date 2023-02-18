@@ -19,3 +19,18 @@
 *{
     box-sizing: inherit;
 }
+.linkSupport{
+    margin: 0 2px;
+}
+.linkSupport:hover{
+    text-decoration: revert; 
+}
+.boderIcon::after{
+    position: absolute;
+    content: "";
+    border: 1px solid #dbdbdb;
+    top: 4px;
+    width: 1px;
+    z-index: 10;
+    height: 17px;
+}
