@@ -2,6 +2,8 @@ import Home from "../pages/home";
 import Items from "../pages/items";
 import Listitem from "../pages/List-items";
 import Search from "../pages/search";
+import Login from "../layout/auth/Login";
+import SignUp from "../layout/auth/SignUp";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -20,6 +22,16 @@ const publicRoutes =[
     {
         path:"/search/:slug",
         element:Search,
+    },
+    {
+        path:"/auth/signup",
+        element:SignUp,
+        layout:null,
+    },
+    {
+        path:"/auth/login",
+        element:Login,
+        layout:null,
     },
 ]
 
