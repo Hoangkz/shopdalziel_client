@@ -3,7 +3,7 @@ import { AiFillFacebook, AiOutlineShoppingCart } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import "../auth.css"
-import React, { startTransition } from 'react';
+import { useState, startTransition, useEffect } from "react";
 
 export default function SignUp() {
     const handleClickGoBack=()=> {
@@ -11,7 +11,68 @@ export default function SignUp() {
             window.history.back();
         });
     }
+    const [formUserName, setFormUserName] = useState("");
+    const [formPassword, setFormPassword] = useState("");
+    const [formPasswordComfirm, setFormPasswordComfirm] = useState("");
 
+    const [userNameError, setUserNameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [passwordComfirmError, setPasswordComfirmError] = useState(false);
+
+    const [checkPasswordForm, setCheckPasswordForm] = useState(false);
+
+    const handleChangeFormUserName = (e) => {
+        const value = e.target.value;
+        setFormUserName(value);
+        if (value.length < 5) {
+            setUserNameError(true);
+        } else {
+            setUserNameError(false);
+        }
+    }
+
+    const handleChangeFormPassword = (e) => {
+        const value = e.target.value;
+        setFormPassword(value);
+        if (value.length < 5) {
+            setPasswordError(true);
+        } else {
+            setPasswordError(false);
+        }
+    }
+
+    const handleChangeFormPasswordComfirm = (e) => {
+        const value = e.target.value;
+        setFormPasswordComfirm(value);
+        if (value.length < 5) {
+            setPasswordComfirmError(true);
+        } else {
+            setPasswordComfirmError(false);
+        }
+    }
+
+    useEffect(()=>{
+        if(formPassword!==formPasswordComfirm){
+            setCheckPasswordForm(true)
+        }
+        else{
+            setCheckPasswordForm(false)
+        }
+    },[formPassword,formPasswordComfirm])
+
+    const handleSubmitForm = (e) => {
+        e.preventDefault(); // Ngăn chặn sự kiện submit mặc định của form
+        // Xử lý logic đăng ký ở đây
+        console.log(formUserName)
+        console.log(formPassword)
+        console.log(formUserName.length)
+        if(formUserName.length>=5&&formPassword.length>=5&&formPasswordComfirm===formPassword) {
+            console.log("ok")
+        }
+    };
+
+    
+    
     return (
         <>
             <Box boxSizing="inherit">
@@ -20,7 +81,7 @@ export default function SignUp() {
 
                     </Box>
                     <Box m={"auto"}backgroundColor="#fff"borderRadius={6}>
-                        <Box>
+                        <form onSubmit={handleSubmitForm}>
                             <Box width={400}margin="32px auto">
                                 <Box>
                                     <Link to={"/"}>
@@ -47,14 +108,18 @@ export default function SignUp() {
                                     </Flex>
                                 </Box>
                                 <Box>
-                                    <Box m={"12px 0"}>
-                                        <Input placeholder="Email/Số điện thoại" border={"2px solid #ccc"}/>
+                                    <Box m={"24px 0"} position="relative">
+                                        <Input onChange={handleChangeFormUserName} placeholder="Email/Số điện thoại" border={"2px solid #ccc"}/>
+                                        {userNameError && <span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Tài khoản phải có ít nhất 5 ký tự!</span>}
                                     </Box>
-                                    <Box m={"12px 0"}>
-                                        <Input placeholder="Mật khẩu" type={"password"} border={"2px solid #ccc"}/>
+                                    <Box m={"24px 0"} position="relative">
+                                        <Input onChange={handleChangeFormPassword} placeholder="Mật khẩu" type={"password"} border={"2px solid #ccc"}/>
+                                        {passwordError && <span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Mật khẩu phải có ít nhất 5 ký tự!</span>}
                                     </Box>
-                                    <Box m={"12px 0"}>
-                                        <Input placeholder="Nhập lại mật khẩu" type={"password"} border={"2px solid #ccc"}/>
+                                    <Box m={"24px 0"} position="relative">
+                                        <Input onChange={handleChangeFormPasswordComfirm} placeholder="Nhập lại mật khẩu" type={"password"} border={"2px solid #ccc"}/>
+                                        {passwordComfirmError && <span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Mật khẩu phải có ít nhất 5 ký tự!</span>}
+                                        {(checkPasswordForm&&!passwordComfirmError)&&<span style={{ color: 'red',fontSize:"13px",position:"absolute",bottom:"-20px",left:"1px" }}>Mật khẩu và mật khẩu nhập lại không giống nhau!</span>}
                                     </Box>
                                 </Box>
                                 <Box fontSize="12px" textAlign={"center"} color={"black"}>
@@ -76,7 +141,7 @@ export default function SignUp() {
                                         Trở lại
                                     </Button>
                                     <Box m={2}></Box>
-                                    <Button w={140} backgroundColor="#ea4d2d" color={"#fff"} _hover={{"opacity":"0.7"}} size='md' >
+                                    <Button type="submit" w={140} backgroundColor="#ea4d2d" color={"#fff"} _hover={{"opacity":"0.7"}} size='md' >
                                         Đăng ký
                                     </Button>
                                 </Flex>
@@ -93,7 +158,7 @@ export default function SignUp() {
                                     </Box>
                                 </Flex>
                             </Box>
-                        </Box>
+                        </form>
                     </Box>
                 </Flex>
             </Box>
