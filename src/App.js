@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Fragment } from 'react';
 
 export default function App() {
-  const isLogined = useSelector((state) => state.user.isLogined);
+  // const isLogined = useSelector((state) => state.user.isLogined);
   return (
     <ChakraProvider>
       <Router>

@@ -15,26 +15,34 @@ import {
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/userSlice";
+import { useEffect } from "react";
+import { addtoAction } from "../../../redux/actions";
 
 export default function Header() {
-  const isLogined = useSelector((state) => state.user.isLogined);
-  console.log(isLogined)
+  // const isLogined = useSelector((state) => state.user.isLogined);
+  // console.log(isLogined)
+  let isLogined =false
   const [search, setSearch] = useState();
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
- 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClickLogOut = (e) => {
     dispatch(logout());
   };
+
+  const handleClickButton = (e) => {
+    dispatch(addtoAction({search:search}));
+    navigate("/search")
+
+  }
   const role = 3;
   return (
     <>
@@ -244,17 +252,15 @@ export default function Header() {
                   outline="none"
                   backgroundColor={"#fff"}
                 />
-                <Link to={search ? `/search/${search}` : null}>
-                  <Button
-                    mx={4}
-                    backgroundColor="transparent"
-                    color="#fff"
-                    variant="outline"
-                    _hover={{ backgroundColor: "#f53e2d" }}
-                  >
-                    Search
-                  </Button>
-                </Link>
+                <Button onClick={handleClickButton}
+                  mx={4}
+                  backgroundColor="transparent"
+                  color="#fff"
+                  variant="outline"
+                  _hover={{ backgroundColor: "#f53e2d" }}
+                >
+                  Search
+                </Button>
               </Flex>
             </Box>
             <Box fontSize="2.5rem" color="#fff" className="navItem">

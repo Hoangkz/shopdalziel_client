@@ -4,8 +4,11 @@ import "./search.css";
 import { useEffect, useState } from "react";
 import shopApi from "../../API/shopApi";
 import ReactPaginate from "react-paginate";
+import { searchHeaders } from "../../redux/selector";
+import { useSelector } from "react-redux";
+
 export default function ListItems(){
-    const { slug } = useParams();
+    const search = useSelector(searchHeaders).search
     const [dataItem, setDataItem] = useState()
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -16,13 +19,13 @@ export default function ListItems(){
     useEffect(() => {
         (async () => {
           try {
-            const res = await shopApi.search(slug,currentPage);
+            const res = await shopApi.search(search,currentPage);
             setDataItem(res.data);
           } catch (error) {
             console.log(error);
           }
         })();
-    },[slug,currentPage]);
+    },[search,currentPage]);
     return(
         <>  
             <Box>
