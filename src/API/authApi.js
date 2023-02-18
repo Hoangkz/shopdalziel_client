@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const authApi = {
   login(data) {
-    const url = "/login/";
+    const url = "/auth/login";
     return axiosClient.post(url, data);
   },
   signup(data) {

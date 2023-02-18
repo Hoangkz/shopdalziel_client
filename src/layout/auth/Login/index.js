@@ -1,15 +1,57 @@
-import { Box, Button, Flex, Icon, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Input } from "@chakra-ui/react";
 import { AiFillFacebook, AiOutlineShoppingCart } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../auth.css"
 import React, { startTransition } from 'react';
+import { useState } from "react";
+import authApi from "../../../API/authApi";
+import { toast } from "react-toastify";
+import jwt_decode from "jwt-decode";
 
 export default function SignUp() {
     const handleClickGoBack=()=> {
         startTransition(() => {
             window.history.back();
         });
+    }
+
+    const navigate = useNavigate();
+
+    const [formUserName, setFormUserName] = useState("");
+    const [formPassword, setFormPassword] = useState("");
+
+    const handleChangeFormUserName = (e) => {
+        const value = e.target.value;
+        setFormUserName(value);
+    }
+
+    const handleChangeFormPassword = (e) => {
+        const value = e.target.value;
+        setFormPassword(value);
+    }
+    const handSubmitForm = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('username', formUserName);
+        formData.append('password', formPassword);
+
+        authApi.login(formData)
+        .then(response => {
+            toast.success(response.data.message);
+            // navigate('/auth/login');
+            const token = response.data.token;
+            localStorage.setItem("token", token);
+            const decoded = jwt_decode(token);
+            console.log(decoded);
+            // localStorage.setItem("user", JSON.stringify(decoded.user));
+        })
+        .catch(error => {
+            toast.error(error.response.data.message);
+        })
+        console.log(formUserName)
+        console.log(formPassword)
     }
 
     return (
@@ -20,7 +62,7 @@ export default function SignUp() {
 
                     </Box>
                     <Box m={"auto"}backgroundColor="#fff"borderRadius={6}>
-                        <Box>
+                        <form onSubmit={handSubmitForm}>
                             <Box width={400}margin="32px auto">
                                 <Box>
                                     <Link to={"/"}>
@@ -48,10 +90,10 @@ export default function SignUp() {
                                 </Box>
                                 <Box>
                                     <Box m={"12px 0"}>
-                                        <Input placeholder="Email/Số điện thoại" border={"2px solid #ccc"}/>
+                                        <Input onChange={handleChangeFormUserName} placeholder="Email/Số điện thoại" border={"2px solid #ccc"}/>
                                     </Box>
                                     <Box m={"12px 0"}>
-                                        <Input placeholder="Mật khẩu" type={"password"} border={"2px solid #ccc"}/>
+                                        <Input onChange={handleChangeFormPassword} placeholder="Mật khẩu" type={"password"} border={"2px solid #ccc"}/>
                                     </Box>
                                 </Box>
                                 <Box position={"relative"} fontSize="16px" textAlign={"end"} color={"black"}>
@@ -68,7 +110,7 @@ export default function SignUp() {
                                         Trở lại
                                     </Button>
                                     <Box m={2}></Box>
-                                    <Button w={140} backgroundColor="#ea4d2d" color={"#fff"} _hover={{"opacity":"0.7"}} size='md' >
+                                    <Button type="submit" w={140} backgroundColor="#ea4d2d" color={"#fff"} _hover={{"opacity":"0.7"}} size='md' >
                                         Đăng nhập
                                     </Button>
                                 </Flex>
@@ -85,7 +127,7 @@ export default function SignUp() {
                                     </Box>
                                 </Flex>
                             </Box>
-                        </Box>
+                        </form>
                     </Box>
                 </Flex>
             </Box>

@@ -13,9 +13,8 @@ root.render(
   <Provider store={store}>
       <React.StrictMode>
         <App />
-      <ToastContainer position="top-right" autoClose={2000} draggablePercent={60}  />
+        <ToastContainer position="top-right" autoClose={2000} draggablePercent={60}  />
       </React.StrictMode>
-      {/* autoClose={2000} draggablePercent={60} */}
   </Provider>
 );
 
