@@ -50,7 +50,7 @@ export default function Header(){
                             </ListItem>
                             {!isLogined? (
                                 <ListItem className="navItem" margin="8px">
-                                    <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng ký</Link>
+                                    <Link to="/auth/signup" style={{"textDecoration":"none","color":"#fff"}}>Đăng ký</Link>
                                 </ListItem>
                                 ):(
                                 <ListItem className="navItem" margin="8px">
@@ -58,7 +58,7 @@ export default function Header(){
                             }
                             {!isLogined? (
                                 <ListItem className="navItem" margin="8px">
-                                    <Link to="/" style={{"textDecoration":"none","color":"#fff"}}>Đăng nhập</Link>
+                                    <Link to="/auth/login" style={{"textDecoration":"none","color":"#fff"}}>Đăng nhập</Link>
                                 </ListItem>
                                 ):(
                                 <ListItem margin="8px" position={"relative"}>
