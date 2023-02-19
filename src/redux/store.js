@@ -20,6 +20,7 @@ export default configureStore({
 
 // dispatch(searchSlice.actions.searchFilterChange(search)) ===> đưa dữ liệu vào
 // export const searchHeaderSelector = (state)=>state.searchHeader.search ==> lấy dữ liệu ra
+// searchHeader là tên của actions, search là biến lưu trữ
 
 
 
