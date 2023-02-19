@@ -1,1 +1,0 @@
-export const searchHeaders = (state)=>state.filter.search;

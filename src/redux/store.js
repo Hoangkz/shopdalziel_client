@@ -1,14 +1,11 @@
-// import { createStore } from "redux";
-// import roothReducer from "./reducer"
-// const store = createStore(roothReducer);
-// export default store;
 
 import { configureStore } from "@reduxjs/toolkit";
-
-const store = configureStore({
+import filtersSlice from "../components/Filters/filtersSlice";
+import todosSlice from "../components/TodoList/todosSlice";
+ 
+export default configureStore({
     reducer: {
-        file
+        filters: filtersSlice.reducer,
+        todoList: todosSlice.reducer,
     }
 })
-
-export default store;
