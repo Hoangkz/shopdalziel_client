@@ -16,12 +16,13 @@ export default createSlice({
             state.search = action.payload
         },
         statusFilterChange:(state, action)=>{
-            // xử lý trả dữ liệu
             state.status = action.payload
         },
         prioritiesFilterChange:(state, action)=>{
-            // xử lý trả dữ liệu
             state.priorities = action.payload
+        },
+        searchTextHeaderAction:(state, action)=>{
+            state.search = action.payload
         },
     }
 })

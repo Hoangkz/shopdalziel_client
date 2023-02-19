@@ -19,7 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchHeaderAction } from "../../../redux/actions";
+import filtersSlice from "../../../components/Filters/filtersSlice";
 
 export default function Header() {
   const [search, setSearch] = useState();
@@ -37,7 +37,7 @@ export default function Header() {
   };
 
   const handleClickButton = (e) => {
-    dispatch(searchHeaderAction({search:search}));
+    dispatch(filtersSlice.action.searchFilterChange(search));
     navigate("/search")
 
   }

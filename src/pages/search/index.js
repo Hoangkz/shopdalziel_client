@@ -8,7 +8,7 @@ import { searchTextSelector } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 
 export default function ListItems(){
-    const search = useSelector(searchTextSelector).search
+    const search = useSelector(searchTextSelector)
     const [dataItem, setDataItem] = useState()
 
     const [currentPage, setCurrentPage] = useState(1);

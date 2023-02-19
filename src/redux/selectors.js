@@ -3,7 +3,6 @@ export const searchTextSelector = (state)=>state.filters.search;
 export const filterStatusSelector = (state)=>state.filters.status;
 export const filterPrioritiesSelector = (state)=>state.filters.priorities;
 export const todoListSelector = (state)=>state.todoList;
-
 export const todosRemainingSelector = createSelector(
     todoListSelector,
     filterStatusSelector,
