@@ -18,7 +18,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./header.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import searchSlice from "../../../components/search";
 import shopApi from "../../../API/shopApi";
@@ -27,22 +27,51 @@ export default function Header() {
   const [search, setSearch] = useState("");
   const [isLogined, setIsLogined] = useState(true);
   const [dataItem, setDataItem] = useState([]);
+  const [checkdataItem, setCheckDataItem] = useState(false);
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
+
+  const myElementRef = useRef(null);
+
+  function handleClickFormSearch() {
+    return myElementRef.current?.getBoundingClientRect() || 0;
+  }
+
   const handleClickLink = (e) => {
-    setSearch("");
+    setCheckDataItem(false)
   };
-  const handleBlurInput = (e) => {
-    setSearch("");
-  };
- 
+
+  useEffect(() => {
+    function handleClick(event) {
+      const x = event.clientX;
+      const y = event.clientY;
+      const rect = handleClickFormSearch();
+      if (rect) {
+        if (
+          (x > rect.x && y < rect.y) ||
+          (x < rect.x && y > rect.y) ||
+          (x > rect.x && y > rect.y)
+        ) {
+          setCheckDataItem(false)
+        }
+      }
+    }
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
   useEffect(() => {
     (async () => {
       try {
-        if (search) {
-          const res = await shopApi.searchClient(search);
+        if(search.trim()) {
+          const res = await shopApi.searchClient(search.trim());
           setDataItem(res.data.items);
+          setCheckDataItem(true)
         } else {
           setDataItem([]);
         }
@@ -292,14 +321,17 @@ export default function Header() {
               <Flex>
                 <Input
                   onChange={handleChangeInput}
-                  onBlur={handleBlurInput}
+                  // ref={inputRef}
                   w="75%"
                   placeholder="Search"
                   outline="none"
                   backgroundColor={"#fff"}
+                  tabIndex="2"
                 />
-                {search.length > 0 ? (
+                {search.length > 0&&checkdataItem ? (
                   <Box
+                    ref={myElementRef}
+                    onClick={handleClickFormSearch}
                     position={"fixed"}
                     backgroundColor="white"
                     overflow={"scroll"}
@@ -318,6 +350,7 @@ export default function Header() {
                                 <Link
                                   key={index}
                                   onClick={handleClickLink}
+                                  tabIndex="100"
                                   to={`/items/${data?.name}`}
                                 >
                                   <Box
