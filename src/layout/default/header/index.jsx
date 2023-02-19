@@ -22,8 +22,8 @@ import { useDispatch } from "react-redux";
 import { searchHeaderAction } from "../../../redux/actions";
 
 export default function Header() {
-  let isLogined =false
   const [search, setSearch] = useState();
+  const [isLogined, setIsLogined] = useState(true);
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
@@ -31,7 +31,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleClickLogOut = (e) => {
-    
+    setIsLogined(false)
   };
 
   const handleClickButton = (e) => {
