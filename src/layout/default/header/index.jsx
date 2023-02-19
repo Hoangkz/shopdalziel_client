@@ -27,7 +27,9 @@ export default function Header() {
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
+  
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleClickLogOut = (e) => {
