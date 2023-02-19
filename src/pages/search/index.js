@@ -4,11 +4,12 @@ import "./search.css";
 import { useEffect, useState } from "react";
 import shopApi from "../../API/shopApi";
 import ReactPaginate from "react-paginate";
-import { searchTextSelector } from "../../redux/selectors";
+import { searchHeaderSelector } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 
 export default function ListItems(){
-    const search = useSelector(searchTextSelector)
+    const search = useSelector(searchHeaderSelector)
+    console.log(search)
     const [dataItem, setDataItem] = useState()
 
     const [currentPage, setCurrentPage] = useState(1);

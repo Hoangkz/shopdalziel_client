@@ -19,10 +19,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import filtersSlice from "../../../components/Filters/filtersSlice";
+import searchSlice from "../../../components/search";
 
 export default function Header() {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const [isLogined, setIsLogined] = useState(true);
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
@@ -37,7 +37,7 @@ export default function Header() {
   };
 
   const handleClickButton = (e) => {
-    dispatch(filtersSlice.action.searchFilterChange(search));
+    dispatch(searchSlice.actions.searchFilterChange(search));
     navigate("/search")
 
   }
