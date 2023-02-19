@@ -4,9 +4,7 @@ import Listitem from "../pages/List-items";
 import Search from "../pages/search";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
-import Filters from "../components/Filters";
-import Todo from "../components/Todo";
-import TodoList from "../components/TodoList";
+import TodoList from "../components/V-Test";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -37,15 +35,7 @@ const publicRoutes =[
         layout:null,
     },
     {
-        path:"/test/filters/",
-        element:Filters,
-    },
-    {
-        path:"/test/Todo",
-        element:Todo,
-    },
-    {
-        path:"/test/TodoList",
+        path:"/test",
         element:TodoList,
     },
 ]
