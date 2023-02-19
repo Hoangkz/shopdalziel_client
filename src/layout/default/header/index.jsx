@@ -11,36 +11,62 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverHeader,
+  Image,
 } from "@chakra-ui/react";
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsFillBagCheckFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./header.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import searchSlice from "../../../components/search";
+import shopApi from "../../../API/shopApi";
 
 export default function Header() {
   const [search, setSearch] = useState("");
   const [isLogined, setIsLogined] = useState(true);
+  const [dataItem, setDataItem] = useState([]);
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
-  
+  const handleClickLink = (e) => {
+    setSearch("");
+  };
+  const handleBlurInput = (e) => {
+    setSearch("");
+  };
+ 
+  useEffect(() => {
+    (async () => {
+      try {
+        if (search) {
+          const res = await shopApi.searchClient(search);
+          setDataItem(res.data.items);
+        } else {
+          setDataItem([]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [search]);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleClickLogOut = (e) => {
-    setIsLogined(false)
+    setIsLogined(false);
   };
+  const location = useLocation();
 
   const handleClickButton = (e) => {
     dispatch(searchSlice.actions.searchFilterChange(search));
-    navigate("/search")
+    if (location.pathname !== "/search") {
+      navigate("/search");
+    }
+  };
 
-  }
   const role = 3;
   return (
     <>
@@ -125,7 +151,7 @@ export default function Header() {
                         UserName
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent w={"220px"} >
+                    <PopoverContent w={"220px"}>
                       <PopoverArrow />
                       <List>
                         <ListItem className="navItem_hover">
@@ -151,7 +177,9 @@ export default function Header() {
                                   fontSize: "1rem",
                                 }}
                               >
-                                <PopoverHeader p={"12px 16px"}>Giỏ hàng của tôi</PopoverHeader>
+                                <PopoverHeader p={"12px 16px"}>
+                                  Giỏ hàng của tôi
+                                </PopoverHeader>
                               </Link>
                             </ListItem>
                             <ListItem className="navItem_hover">
@@ -163,7 +191,9 @@ export default function Header() {
                                   fontSize: "1rem",
                                 }}
                               >
-                                <PopoverHeader p={"12px 16px"}>Đơn hàng của tôi</PopoverHeader>
+                                <PopoverHeader p={"12px 16px"}>
+                                  Đơn hàng của tôi
+                                </PopoverHeader>
                               </Link>
                             </ListItem>
                           </>
@@ -177,7 +207,9 @@ export default function Header() {
                                 fontSize: "1rem",
                               }}
                             >
-                              <PopoverHeader p={"12px 16px"}>Quản lý đơn hàng</PopoverHeader>
+                              <PopoverHeader p={"12px 16px"}>
+                                Quản lý đơn hàng
+                              </PopoverHeader>
                             </Link>
                           </ListItem>
                         ) : role === 3 ? (
@@ -191,7 +223,9 @@ export default function Header() {
                                   fontSize: "1rem",
                                 }}
                               >
-                                <PopoverHeader p={"12px 16px"}>Quản lý đơn hàng</PopoverHeader>
+                                <PopoverHeader p={"12px 16px"}>
+                                  Quản lý đơn hàng
+                                </PopoverHeader>
                               </Link>
                             </ListItem>
                             <ListItem className="navItem_hover">
@@ -203,7 +237,9 @@ export default function Header() {
                                   fontSize: "1rem",
                                 }}
                               >
-                                <PopoverHeader p={"12px 16px"}>Danh sách Account</PopoverHeader>
+                                <PopoverHeader p={"12px 16px"}>
+                                  Danh sách Account
+                                </PopoverHeader>
                               </Link>
                             </ListItem>
                             <ListItem className="navItem_hover">
@@ -215,15 +251,26 @@ export default function Header() {
                                   fontSize: "1rem",
                                 }}
                               >
-                                <PopoverHeader p={"12px 16px"}>Danh sách sản phẩm</PopoverHeader>
+                                <PopoverHeader p={"12px 16px"}>
+                                  Danh sách sản phẩm
+                                </PopoverHeader>
                               </Link>
                             </ListItem>
                           </>
                         ) : null}
-                        <ListItem className="navItem_hover" cursor={"pointer"} >
-                            <Button onClick={handleClickLogOut}>
-                              <PopoverHeader  p={"12px 16px"}>Đăng xuất</PopoverHeader>
-                            </Button>
+                        <ListItem className="navItem_hover" cursor={"pointer"}>
+                          <Box
+                            style={{
+                              display: "block",
+                              color: "black",
+                              fontSize: "1rem",
+                            }}
+                            onClick={handleClickLogOut}
+                          >
+                            <PopoverHeader p={"12px 16px"}>
+                              Đăng xuất
+                            </PopoverHeader>
+                          </Box>
                         </ListItem>
                       </List>
                     </PopoverContent>
@@ -235,7 +282,7 @@ export default function Header() {
         </Box>
         <Box w="80%" margin="auto" mt={4} pb={0}>
           <Flex justify={"space-between"}>
-            <Box fontSize="2.5rem" color="#fff">
+            <Box fontSize="2.5rem" color="#fff" position="relative">
               <Link to={"/"} style={{ color: "#fff" }} className="navItem">
                 <Icon as={BsFillBagCheckFill} mt="-15px" bg="" color="#fff" />
                 Dalziel
@@ -245,12 +292,67 @@ export default function Header() {
               <Flex>
                 <Input
                   onChange={handleChangeInput}
+                  onBlur={handleBlurInput}
                   w="75%"
                   placeholder="Search"
                   outline="none"
                   backgroundColor={"#fff"}
                 />
-                <Button onClick={handleClickButton}
+                {search.length > 0 ? (
+                  <Box
+                    position={"fixed"}
+                    backgroundColor="white"
+                    overflow={"scroll"}
+                    w="45%"
+                    maxH={400}
+                    top="100"
+                  >
+                    <Box p={"10px 18px"} backgroundColor="#ddd">
+                      Từ khoá tìm kiếm "{search}"
+                    </Box>
+                    <List>
+                      <ListItem>
+                        {dataItem
+                          ? dataItem?.map((data, index) => {
+                              return (
+                                <Link
+                                  key={index}
+                                  onClick={handleClickLink}
+                                  to={`/items/${data?.name}`}
+                                >
+                                  <Box
+                                    _hover={{
+                                      backgroundColor: "#fafaf8",
+                                      color: "black",
+                                      border: "1px solid #b3b2b2",
+                                    }}
+                                    style={{
+                                      display: "flex",
+                                      padding: "12px 15px",
+                                    }}
+                                  >
+                                    <Image
+                                      src={data?.img}
+                                      alt={data?.name}
+                                      style={{ width: "60px" }}
+                                    />
+                                    <Box
+                                      _hover={{ color: "black" }}
+                                      m={"auto 16px"}
+                                    >
+                                      {data?.name}
+                                    </Box>
+                                  </Box>
+                                </Link>
+                              );
+                            })
+                          : null}
+                      </ListItem>
+                    </List>
+                  </Box>
+                ) : null}
+                <Button
+                  onClick={handleClickButton}
                   mx={4}
                   backgroundColor="transparent"
                   color="#fff"

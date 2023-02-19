@@ -24,7 +24,7 @@ export default function ListItems() {
                 console.log(error);
             }
         })();
-    }, []);
+    }, [slug]);
     return (
         <>
             <Box>
