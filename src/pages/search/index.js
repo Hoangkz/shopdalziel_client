@@ -1,14 +1,14 @@
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./search.css";
 import { useEffect, useState } from "react";
 import shopApi from "../../API/shopApi";
 import ReactPaginate from "react-paginate";
-import { searchHeaders } from "../../redux/selector";
+import { searchTextSelector } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 
 export default function ListItems(){
-    const search = useSelector(searchHeaders).search
+    const search = useSelector(searchTextSelector).search
     const [dataItem, setDataItem] = useState()
 
     const [currentPage, setCurrentPage] = useState(1);

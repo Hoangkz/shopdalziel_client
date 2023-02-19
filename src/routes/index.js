@@ -4,6 +4,9 @@ import Listitem from "../pages/List-items";
 import Search from "../pages/search";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
+import Filters from "../components/Filters";
+import Todo from "../components/Todo";
+import TodoList from "../components/TodoList";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -32,6 +35,18 @@ const publicRoutes =[
         path:"/auth/login",
         element:Login,
         layout:null,
+    },
+    {
+        path:"/test/filters/",
+        element:Filters,
+    },
+    {
+        path:"/test/Todo",
+        element:Todo,
+    },
+    {
+        path:"/test/TodoList",
+        element:TodoList,
     },
 ]
 
