@@ -1,4 +1,4 @@
-import { Row, Tag, Checkbox } from 'antd';
+import { Flex, Tag, Checkbox } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import todoListSlice from '../TodoList/todosSlice';
@@ -17,7 +17,7 @@ export default function Todo({ name, prioriry, completed, id }) {
   };
 
   return (
-    <Row
+    <Flex
       justify='space-between'
       style={{
         marginBottom: 3,
@@ -30,6 +30,6 @@ export default function Todo({ name, prioriry, completed, id }) {
       <Tag color={priorityColorMapping[prioriry]} style={{ margin: 0 }}>
         {prioriry}
       </Tag>
-    </Row>
+    </Flex>
   );
 }

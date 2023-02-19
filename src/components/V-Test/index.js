@@ -1,8 +1,7 @@
-import { Typography, Divider } from 'antd';
+import { Text, Divider } from '@chakra-ui/react';
 import TodoList from '../TodoList';
 import Filters from '../Filters';
 
-const { Title } = Typography;
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
         height: '90vh',
       }}
     >
-      <Title style={{ textAlign: 'center' }}>TODO APP with REDUX</Title>
+      <Text style={{ textAlign: 'center' }}>TODO APP with REDUX</Text>
       <Filters />
       <Divider />
       <TodoList />
