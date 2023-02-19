@@ -2,7 +2,6 @@ import axiosClient from "./axiosClient";
 const shopApi = {
   // get Courses trending
   search(query,page) {
-    console.log(query);
     const url = `/items/search?q=${query}&page=${page}`;
     return axiosClient.get(url);
   },

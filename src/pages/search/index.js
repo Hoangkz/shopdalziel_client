@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 export default function ListItems(){
     const search = useSelector(searchHeaderSelector)
-    console.log(search)
     const [dataItem, setDataItem] = useState()
 
     const [currentPage, setCurrentPage] = useState(1);

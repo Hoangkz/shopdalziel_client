@@ -10,7 +10,6 @@ export default createSlice({
     reducers:{
         searchFilterChange:(state, action)=>{
             // xử lý trả dữ liệu
-            console.log(action)
             state.search = action.payload
         },
     }
