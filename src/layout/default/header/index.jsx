@@ -23,8 +23,9 @@ import { useDispatch, useSelector } from "react-redux";
 import searchSlice from "../../../components/search";
 import shopApi from "../../../API/shopApi";
 import authSlice from '../../../components/auth';
-import { checkAccountSelector, userSelector } from "../../../redux/selectors";
+import { checkAccountSelector, refresh_tokenSelector, userSelector } from "../../../redux/selectors";
 import { toast } from "react-toastify";
+import authApi from "../../../API/authApi";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -85,8 +86,14 @@ export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClickLogOut = (e) => {
-    dispatch(authSlice.actions.logout());
-    toast.success("Tài khoản của bạn đã được đăng xuất")
+    authApi.logout()
+    .then((response)=>{
+      toast.success(response.data.message);
+      dispatch(authSlice.actions.logout());
+    })
+    .catch((error) => {
+      toast.error(error.response.data.message);
+    })
   };
   const location = useLocation();
   const handleClickButton = (e) => {

@@ -5,28 +5,18 @@ const authApi = {
     const url = "/auth/login";
     return axiosClient.post(url, data);
   },
-  refresh_Token(data) {
+  logout() {
+    const url = "/auth/logout";
+    return axiosClient.post(url);
+  },
+  refresh_Token(refresh_token) {
     const url = "/auth/refresh-token";
-    return axiosClient.post(url, data);
+    return axiosClient.post(url, refresh_token);
   },
   signup(data) {
     const url = "/auth/signup";
     return axiosClient.post(url, data);
   },
-  refreshToken(token) {
-    axiosClient.post('/api/refreshToken', null, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data.token;
-    })
-    .catch((error) => {
-      return error;
-    });
-
-  }
 };
 
 export default authApi;
