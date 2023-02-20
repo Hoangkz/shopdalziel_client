@@ -8,8 +8,13 @@ import { useState } from "react";
 import authApi from "../../../API/authApi";
 import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
+import { useDispatch } from 'react-redux';
+import authSlice from '../../../components/auth';
 
 export default function SignUp() {
+
+    const dispatch = useDispatch();
+
     const handleClickGoBack=()=> {
         startTransition(() => {
             window.history.back();
@@ -41,11 +46,15 @@ export default function SignUp() {
         .then(response => {
             toast.success(response.data.message);
             const token = response.data.token;
+            const refresh_token = response.data.refresh_token;
             localStorage.setItem("token", token);
+            localStorage.setItem("refresh_token", refresh_token);
             const decoded = jwt_decode(token);
             console.log(decoded);
             localStorage.setItem("user", JSON.stringify(decoded.data));
             navigate('/');
+
+            dispatch(authSlice.actions.login({checkLogin:true,user:decoded,token:token,refresh_token:refresh_token}));
         })
         .catch(error => {
             toast.error(error.response.data.message);

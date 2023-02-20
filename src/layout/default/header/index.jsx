@@ -19,29 +19,28 @@ import { BsFillBagCheckFill } from "react-icons/bs";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./header.css";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import searchSlice from "../../../components/search";
 import shopApi from "../../../API/shopApi";
+import authSlice from '../../../components/auth';
+import { checkAccountSelector } from "../../../redux/selectors";
 
 export default function Header() {
   const [search, setSearch] = useState("");
-  const [isLogined, setIsLogined] = useState(true);
+  // const [isLogined, setIsLogined] = useState(true);
+  const isLogined = useSelector(checkAccountSelector);
   const [dataItem, setDataItem] = useState([]);
   const [checkdataItem, setCheckDataItem] = useState(false);
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
-
   const myElementRef = useRef(null);
-
   function handleClickFormSearch() {
     return myElementRef.current?.getBoundingClientRect() || 0;
   }
-
   const handleClickLink = (e) => {
     setCheckDataItem(false)
   };
-
   useEffect(() => {
     function handleClick(event) {
       const x = event.clientX;
@@ -64,7 +63,6 @@ export default function Header() {
       document.removeEventListener("click", handleClick);
     };
   }, []);
-
   useEffect(() => {
     (async () => {
       try {
@@ -81,20 +79,18 @@ export default function Header() {
     })();
   }, [search]);
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
   const handleClickLogOut = (e) => {
-    setIsLogined(false);
+    dispatch(authSlice.actions.logout());
   };
   const location = useLocation();
-
   const handleClickButton = (e) => {
     dispatch(searchSlice.actions.searchFilterChange(search));
     if (location.pathname !== "/search") {
       navigate("/search");
     }
   };
+
 
   const role = 3;
   return (

@@ -1,5 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 export const searchTextSelector = (state)=>state.filters.search;
+export const checkAccountSelector = (state)=>state.authSlice.checkLogin;
+export const checkTokenSelector = (state)=>state.authSlice.refresh_token;
 export const searchHeaderSelector = (state)=>state.searchHeader.search;
 export const filterStatusSelector = (state)=>state.filters.status;
 export const filterPrioritiesSelector = (state)=>state.filters.priorities;

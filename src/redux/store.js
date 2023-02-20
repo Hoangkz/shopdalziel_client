@@ -3,12 +3,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import filtersSlice from "../components/Filters/filtersSlice";
 import todosSlice from "../components/TodoList/todosSlice";
 import searchSlice from "../components/search";
+import authSlice from "../components/auth";
  
 export default configureStore({
     reducer: {
         filters: filtersSlice.reducer,
         todoList: todosSlice.reducer,
         searchHeader:searchSlice.reducer,
+        authSlice:authSlice.reducer,
     }
 })
 
