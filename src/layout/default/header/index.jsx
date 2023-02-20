@@ -38,9 +38,11 @@ export default function Header() {
   function handleClickFormSearch() {
     return myElementRef.current?.getBoundingClientRect() || 0;
   }
+
   const handleClickLink = (e) => {
     setCheckDataItem(false)
   };
+  
   useEffect(() => {
     function handleClick(event) {
       const x = event.clientX;
@@ -63,6 +65,7 @@ export default function Header() {
       document.removeEventListener("click", handleClick);
     };
   }, []);
+  
   useEffect(() => {
     (async () => {
       try {

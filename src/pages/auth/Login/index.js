@@ -50,7 +50,7 @@ export default function SignUp() {
             localStorage.setItem("token", token);
             localStorage.setItem("refresh_token", refresh_token);
             const decoded = jwt_decode(token);
-            console.log(decoded);
+            // console.log(decoded);
             localStorage.setItem("user", JSON.stringify(decoded.data));
             navigate('/');
 

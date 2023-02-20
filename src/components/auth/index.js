@@ -14,7 +14,7 @@ export default createSlice({
     reducers:{
         login:(state, action)=>{
             // xử lý trả dữ liệu
-            console.log(action)
+            // console.log(action)
             state.checkLogin = action.payload.checkLogin
             state.user = action.payload.user
             state.token = action.payload.token

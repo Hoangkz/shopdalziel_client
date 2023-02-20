@@ -12,6 +12,20 @@ const authApi = {
   signup(data) {
     const url = "/auth/signup";
     return axiosClient.post(url, data);
+  },
+  refreshToken(token) {
+    axiosClient.post('/api/refreshToken', null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data.token;
+    })
+    .catch((error) => {
+      return error;
+    });
+
   }
 };
 
