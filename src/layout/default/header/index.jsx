@@ -23,12 +23,13 @@ import { useDispatch, useSelector } from "react-redux";
 import searchSlice from "../../../components/search";
 import shopApi from "../../../API/shopApi";
 import authSlice from '../../../components/auth';
-import { checkAccountSelector } from "../../../redux/selectors";
+import { checkAccountSelector, userSelector } from "../../../redux/selectors";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const [search, setSearch] = useState("");
-  // const [isLogined, setIsLogined] = useState(true);
   const isLogined = useSelector(checkAccountSelector);
+  const userName = useSelector(userSelector)?.data
   const [dataItem, setDataItem] = useState([]);
   const [checkdataItem, setCheckDataItem] = useState(false);
   const handleChangeInput = (e) => {
@@ -85,6 +86,7 @@ export default function Header() {
   const navigate = useNavigate();
   const handleClickLogOut = (e) => {
     dispatch(authSlice.actions.logout());
+    toast.success("Tài khoản của bạn đã được đăng xuất")
   };
   const location = useLocation();
   const handleClickButton = (e) => {
@@ -95,7 +97,7 @@ export default function Header() {
   };
 
 
-  const role = 3;
+  const role = userName?.role;
   return (
     <>
       <Box
@@ -146,7 +148,7 @@ export default function Header() {
                   Hỗ trợ
                 </Link>
               </ListItem>
-              {!isLogined ? (
+              {!isLogined&&!userName ? (
                 <ListItem className="navItem" margin="8px">
                   <Link
                     to="/auth/signup"
@@ -158,7 +160,7 @@ export default function Header() {
               ) : (
                 <ListItem className="navItem" margin="8px"></ListItem>
               )}
-              {!isLogined ? (
+              {!isLogined&&!userName ? (
                 <ListItem className="navItem" margin="8px">
                   <Link
                     to="/auth/login"
@@ -176,7 +178,7 @@ export default function Header() {
                         _hover={{ textDecoration: "none", opacity: "0.6" }}
                         color="#fff"
                       >
-                        UserName
+                        {userName?.username}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent w={"220px"}>

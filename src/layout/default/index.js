@@ -23,7 +23,7 @@ export default function Default({ children }) {
                     const new_token = response.data.token;
                     localStorage.setItem("refresh_token", refresh_token);
                     const decoded = jwt_decode(token);
-                    console.log(decoded);
+                    // console.log(decoded);
                     localStorage.setItem("user", JSON.stringify(decoded.data));
                     localStorage.setItem('token', new_token);
                     dispatch(authSlice.actions.login({ checkLogin: true, user: decoded, token: new_token, refresh_token: refresh_token }));
