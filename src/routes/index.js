@@ -5,6 +5,7 @@ import Search from "../pages/search";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
 import TodoList from "../components/V-Test";
+import FormLogin from "../API/FormLogin";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -37,6 +38,10 @@ const publicRoutes =[
     {
         path:"/test",
         element:TodoList,
+    },
+    {
+        path:"/testLogin",
+        element:FormLogin,
     },
 ]
 

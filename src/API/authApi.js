@@ -5,7 +5,7 @@ const authApi = {
     const url = "/auth/login";
     return axiosClient.post(url, data);
   },
-  refreshToken(data) {
+  refresh_Token(data) {
     const url = "/auth/refresh-token";
     return axiosClient.post(url, data);
   },
