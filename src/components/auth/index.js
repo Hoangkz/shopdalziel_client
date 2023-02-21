@@ -1,8 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const token = (localStorage.getItem("token")||localStorage.getItem("token")==="null"||localStorage.getItem("token")==="undefined")?null : localStorage.getItem("token")
-const refresh_token = (localStorage.getItem("refresh_token")||localStorage.getItem("refresh_token")==="null"||localStorage.getItem("refresh_token")==="undefined")?null : localStorage.getItem("refresh_token")
-const user = (localStorage.getItem("user")||localStorage.getItem("user")==="null"||localStorage.getItem("user")==="undefined")?null : localStorage.getItem("user")
+let token = localStorage.getItem("token")||null
+let refresh_token = localStorage.getItem("refresh_token")||null
+let user = localStorage.getItem("user")||null
+if(token ==="null"||token==="undefined"){
+    token= null
+}
+if(refresh_token ==="null"||refresh_token==="undefined"){
+    refresh_token= null
+}
+
+if(user ==="null"||user==="undefined"){
+    user= null
+}
+
 let checkLogin = false
 if(token&&refresh_token&&user){
     checkLogin = true
@@ -24,7 +35,7 @@ export default createSlice({
         
         login:(state, action)=>{
             // xử lý trả dữ liệu
-            // console.log(action)
+            console.log(action)
             state.checkLogin = action.payload.checkLogin
             state.user = action.payload.user
             state.token = action.payload.token

@@ -23,14 +23,16 @@ import { useDispatch, useSelector } from "react-redux";
 import searchSlice from "../../../components/search";
 import shopApi from "../../../API/shopApi";
 import authSlice from '../../../components/auth';
-import { checkAccountSelector, refresh_tokenSelector, userSelector } from "../../../redux/selectors";
+import { checkAccountSelector, userSelector } from "../../../redux/selectors";
 import { toast } from "react-toastify";
 import authApi from "../../../API/authApi";
 
-export default function Header() {
+export default function Header(children) {
   const [search, setSearch] = useState("");
   const isLogined = useSelector(checkAccountSelector);
-  const userName = useSelector(userSelector)?.data
+  let userName = useSelector(userSelector)?.data
+  console.log(isLogined)
+  console.log(typeof(userName))
   const [dataItem, setDataItem] = useState([]);
   const [checkdataItem, setCheckDataItem] = useState(false);
   const handleChangeInput = (e) => {
@@ -156,85 +158,41 @@ export default function Header() {
                 </Link>
               </ListItem>
               {!isLogined&&!userName ? (
-                <ListItem className="navItem" margin="8px">
-                  <Link
-                    to="/auth/signup"
-                    style={{ textDecoration: "none", color: "#fff" }}
-                  >
-                    Đăng ký
-                  </Link>
-                </ListItem>
-              ) : (
-                <ListItem className="navItem" margin="8px"></ListItem>
-              )}
-              {!isLogined&&!userName ? (
-                <ListItem className="navItem" margin="8px">
+                <>
+                  <ListItem className="navItem" margin="8px">
+                    <Link
+                      to="/auth/signup"
+                      style={{ textDecoration: "none", color: "#fff" }}
+                    >
+                      Đăng ký
+                    </Link>
+                  </ListItem>
+                  <ListItem className="navItem" margin="8px">
                   <Link
                     to="/auth/login"
                     style={{ textDecoration: "none", color: "#fff" }}
                   >
                     Đăng nhập
                   </Link>
-                </ListItem>
+                  </ListItem>
+                </>
               ) : (
-                <ListItem margin="8px" position={"relative"}>
-                  <Popover>
-                    <PopoverTrigger>
-                      <Button
-                        variant={"link"}
-                        _hover={{ textDecoration: "none", opacity: "0.6" }}
-                        color="#fff"
-                      >
-                        {userName?.username}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent w={"220px"}>
-                      <PopoverArrow />
-                      <List>
-                        <ListItem className="navItem_hover">
-                          <Link
-                            to="/"
-                            style={{
-                              display: "block",
-                              color: "black",
-                              fontSize: "1rem",
-                            }}
-                          >
-                            <PopoverHeader>Tài khoản</PopoverHeader>
-                          </Link>
-                        </ListItem>
-                        {role === 1 ? (
-                          <>
-                            <ListItem className="navItem_hover">
-                              <Link
-                                to="/"
-                                style={{
-                                  display: "block",
-                                  color: "black",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                <PopoverHeader p={"12px 16px"}>
-                                  Giỏ hàng của tôi
-                                </PopoverHeader>
-                              </Link>
-                            </ListItem>
-                            <ListItem className="navItem_hover">
-                              <Link
-                                to="/"
-                                style={{
-                                  display: "block",
-                                  color: "black",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                <PopoverHeader p={"12px 16px"}>
-                                  Đơn hàng của tôi
-                                </PopoverHeader>
-                              </Link>
-                            </ListItem>
-                          </>
-                        ) : role === 2 ? (
+                <>
+                  <ListItem className="navItem" margin="8px"></ListItem>
+                  <ListItem margin="8px" position={"relative"}>
+                    <Popover>
+                      <PopoverTrigger>
+                        <Button
+                          variant={"link"}
+                          _hover={{ textDecoration: "none", opacity: "0.6" }}
+                          color="#fff"
+                        >
+                          {userName?.username}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent w={"220px"}>
+                        <PopoverArrow />
+                        <List>
                           <ListItem className="navItem_hover">
                             <Link
                               to="/"
@@ -244,13 +202,41 @@ export default function Header() {
                                 fontSize: "1rem",
                               }}
                             >
-                              <PopoverHeader p={"12px 16px"}>
-                                Quản lý đơn hàng
-                              </PopoverHeader>
+                              <PopoverHeader>Tài khoản</PopoverHeader>
                             </Link>
                           </ListItem>
-                        ) : role === 3 ? (
-                          <>
+                          {role === 1 ? (
+                            <>
+                              <ListItem className="navItem_hover">
+                                <Link
+                                  to="/"
+                                  style={{
+                                    display: "block",
+                                    color: "black",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  <PopoverHeader p={"12px 16px"}>
+                                    Giỏ hàng của tôi
+                                  </PopoverHeader>
+                                </Link>
+                              </ListItem>
+                              <ListItem className="navItem_hover">
+                                <Link
+                                  to="/"
+                                  style={{
+                                    display: "block",
+                                    color: "black",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  <PopoverHeader p={"12px 16px"}>
+                                    Đơn hàng của tôi
+                                  </PopoverHeader>
+                                </Link>
+                              </ListItem>
+                            </>
+                          ) : role === 2 ? (
                             <ListItem className="navItem_hover">
                               <Link
                                 to="/"
@@ -265,54 +251,71 @@ export default function Header() {
                                 </PopoverHeader>
                               </Link>
                             </ListItem>
-                            <ListItem className="navItem_hover">
-                              <Link
-                                to="/"
-                                style={{
-                                  display: "block",
-                                  color: "black",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                <PopoverHeader p={"12px 16px"}>
-                                  Danh sách Account
-                                </PopoverHeader>
-                              </Link>
-                            </ListItem>
-                            <ListItem className="navItem_hover">
-                              <Link
-                                to="/"
-                                style={{
-                                  display: "block",
-                                  color: "black",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                <PopoverHeader p={"12px 16px"}>
-                                  Danh sách sản phẩm
-                                </PopoverHeader>
-                              </Link>
-                            </ListItem>
-                          </>
-                        ) : null}
-                        <ListItem className="navItem_hover" cursor={"pointer"}>
-                          <Box
-                            style={{
-                              display: "block",
-                              color: "black",
-                              fontSize: "1rem",
-                            }}
-                            onClick={handleClickLogOut}
-                          >
-                            <PopoverHeader p={"12px 16px"}>
-                              Đăng xuất
-                            </PopoverHeader>
-                          </Box>
-                        </ListItem>
-                      </List>
-                    </PopoverContent>
-                  </Popover>
-                </ListItem>
+                          ) : role === 3 ? (
+                            <>
+                              <ListItem className="navItem_hover">
+                                <Link
+                                  to="/"
+                                  style={{
+                                    display: "block",
+                                    color: "black",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  <PopoverHeader p={"12px 16px"}>
+                                    Quản lý đơn hàng
+                                  </PopoverHeader>
+                                </Link>
+                              </ListItem>
+                              <ListItem className="navItem_hover">
+                                <Link
+                                  to="/"
+                                  style={{
+                                    display: "block",
+                                    color: "black",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  <PopoverHeader p={"12px 16px"}>
+                                    Danh sách Account
+                                  </PopoverHeader>
+                                </Link>
+                              </ListItem>
+                              <ListItem className="navItem_hover">
+                                <Link
+                                  to="/"
+                                  style={{
+                                    display: "block",
+                                    color: "black",
+                                    fontSize: "1rem",
+                                  }}
+                                >
+                                  <PopoverHeader p={"12px 16px"}>
+                                    Danh sách sản phẩm
+                                  </PopoverHeader>
+                                </Link>
+                              </ListItem>
+                            </>
+                          ) : null}
+                          <ListItem className="navItem_hover" cursor={"pointer"}>
+                            <Box
+                              style={{
+                                display: "block",
+                                color: "black",
+                                fontSize: "1rem",
+                              }}
+                              onClick={handleClickLogOut}
+                            >
+                              <PopoverHeader p={"12px 16px"}>
+                                Đăng xuất
+                              </PopoverHeader>
+                            </Box>
+                          </ListItem>
+                        </List>
+                      </PopoverContent>
+                    </Popover>
+                  </ListItem>
+                </>
               )}
             </List>
           </Flex>
