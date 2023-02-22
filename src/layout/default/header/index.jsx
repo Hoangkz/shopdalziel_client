@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import searchSlice from "../../../components/search";
 import shopApi from "../../../API/shopApi";
 import authSlice from '../../../components/auth';
-import { checkAccountSelector } from "../../../redux/selectors";
+import { tokenRemainingSelector } from "../../../redux/selectors";
 import { toast } from "react-toastify";
 import authApi from "../../../API/authApi";
 
@@ -31,14 +31,13 @@ export default function Header(props) {
 
 
   const [search, setSearch] = useState("");
-  const isLogined = useSelector(checkAccountSelector);
+  const isLogined = useSelector(tokenRemainingSelector).checkLogin;
   const [dataItem, setDataItem] = useState([]);
   const [checkdataItem, setCheckDataItem] = useState(false);
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
   const userName = props.username
-
   const myElementRef = useRef(null);
   function handleClickFormSearch() {
     return myElementRef.current?.getBoundingClientRect() || 0;
@@ -191,7 +190,7 @@ export default function Header(props) {
                           _hover={{ textDecoration: "none", opacity: "0.6" }}
                           color="#fff"
                         >
-                          {userName?.username.charAt(0).toUpperCase() + userName?.username.slice(1)}
+                          {userName?.username?.charAt(0)?.toUpperCase() + userName?.username?.slice(1)}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent w={"220px"}>

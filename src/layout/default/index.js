@@ -2,7 +2,7 @@ import Header from "./header";
 import Footer from "./footer";
 import { Box } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { refresh_tokenSelector, TokenSelector } from "../../redux/selectors";
+import { tokenRemainingSelector } from "../../redux/selectors";
 import { toast } from 'react-toastify';
 import jwt_decode from "jwt-decode";
 import axiosClient from "../../API/axiosClient";
@@ -11,9 +11,9 @@ import authSlice from '../../components/auth';
 
 export default function Default({ children }) {
     const dispatch = useDispatch();
-    const token = useSelector(TokenSelector);
-    const refresh_token = useSelector(refresh_tokenSelector);
-    const userName = JSON.parse(localStorage.getItem("user"))||null;
+    const token = useSelector(tokenRemainingSelector)?.token||null;
+    const refresh_token = useSelector(tokenRemainingSelector)?.refresh_token||null;
+    const userName = useSelector(tokenRemainingSelector)?.user||null;
     if(token) {
         const decoded = jwt_decode(token);
         if (decoded.exp < Date.now() / 1000) {
@@ -33,7 +33,7 @@ export default function Default({ children }) {
                     localStorage.setItem("token", "null");
                     localStorage.setItem("refresh_token", "null");
                     localStorage.setItem("user", "null");        
-                    dispatch(authSlice.actions.login({ checkLogin: false, user: {}, token: null, refresh_token: null }));
+                    dispatch(authSlice.actions.login({ checkLogin: false, user: null, token: null, refresh_token: null }));
                     toast.warning(error.response.data.message);
                 })
         }

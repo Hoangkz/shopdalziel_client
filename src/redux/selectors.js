@@ -22,3 +22,14 @@ export const todosRemainingSelector = createSelector(
             return todo.name.includes(searchText) && (status==="Completed"?todo.completed:!todo.completed)&& (priorities.length? priorities.includes(todo.priority):true);
         })}
     )
+
+export const tokenRemainingSelector = createSelector(
+    checkAccountSelector,
+    userSelector,
+    TokenSelector,
+    refresh_tokenSelector,
+    (checkLogin,user,token,refresh_token)=>{
+        return {
+            checkLogin,user,token,refresh_token
+        }}
+    )

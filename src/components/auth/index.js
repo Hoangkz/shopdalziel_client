@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 let token = localStorage.getItem("token")||null
 let refresh_token = localStorage.getItem("refresh_token")||null
-let user = localStorage.getItem("user")||{}
+let user = JSON.parse(localStorage.getItem("user"))||null
 if(token ==="null"||token==="undefined"){
     token= null
 }
@@ -11,15 +11,13 @@ if(refresh_token ==="null"||refresh_token==="undefined"){
 }
 
 if(user ==="null"||user==="undefined"){
-    user= {}
+    user= null
 }
 
 let checkLogin = false
 if(token&&refresh_token&&user){
     checkLogin = true
 }
-
-
 export default createSlice({
     // name
     name: 'auth',
@@ -43,7 +41,7 @@ export default createSlice({
         },
         logout:(state, action)=>{
             state.checkLogin = false
-            state.user = {}
+            state.user = null
             state.token = null
             state.refresh_token = null
         }

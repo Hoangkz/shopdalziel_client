@@ -59,7 +59,7 @@ export default function SignUp() {
                 navigate('/');
             }
 
-            dispatch(authSlice.actions.login({checkLogin:true,user:decoded,token:token,refresh_token:refresh_token}));
+            dispatch(authSlice.actions.login({checkLogin:true,user:decoded.data,token:token,refresh_token:refresh_token}));
         })
         .catch(error => {
             toast.error(error.response.data.message);

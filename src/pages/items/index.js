@@ -7,13 +7,19 @@ import shopApi from "../../API/shopApi";
 import { BsFacebook, BsInstagram, BsMessenger, BsTwitter } from "react-icons/bs";
 import ModalAddItems from "./modal_add_items"
 import ModalBuyItems from "./modal_buy_items"
+import { tokenRemainingSelector } from "../../redux/selectors";
+import { useSelector } from "react-redux";
 export default function ListItems() {
     const { slug } = useParams();
     const [dataItem, setDataItem] = useState()
     const [isActive, setIsActive] = useState(false);
-    const userName = JSON.parse(localStorage.getItem("user"))
+    const [countItem, setCountItem] = useState(1);
+    const userName = useSelector(tokenRemainingSelector)?.user;
     const toggleClass = () => {
         setIsActive(!isActive);
+    }
+    const handleChangeValue = (e) => {
+        setCountItem(e)
     }
     useEffect(() => {
         (async () => {
@@ -97,12 +103,12 @@ export default function ListItems() {
                                             </Flex>
                                             <Flex>
                                                 <Box m="8px 32px 16px 0">Vân chuyển</Box>
-                                                <Box mt={2} fontSize="1.2rem" lineHeight={1.1}>{userName?.address?userName?.address:"??"}</Box>
+                                                <Box mt={2} fontSize="1.2rem" lineHeight={1.1}>{userName?.address?(userName?.address?.charAt(0).toUpperCase()+userName?.address.slice(1)):"??"}</Box>
                                             </Flex>
                                             <Flex>
                                                 <Box m="8px 32px 16px 0">Số lượng</Box>
                                                 <Stack shouldWrapChildren direction='row'>
-                                                    <NumberInput size='md' maxW={20} defaultValue={1} min={0} max={dataItem?.item?.soluong}>
+                                                    <NumberInput size='md' onChange={handleChangeValue} maxW={20} defaultValue={1} min={0} max={dataItem?.item?.soluong}>
                                                         <NumberInputField />
                                                         <NumberInputStepper>
                                                             <NumberIncrementStepper />
@@ -117,10 +123,9 @@ export default function ListItems() {
                                                 <Box color="#28a745" fontSize="1.75rem" fontWeight={600} lineHeight={1.2}>Miễn phí</Box>
                                             </Flex>
                                             <Flex my={4}>
-                                                <ModalAddItems/>
+                                                <ModalAddItems user ={userName} item = {dataItem?.item} count ={countItem} />
                                                 <Box m={"0 8px"}></Box>
-                                                <ModalBuyItems/>
-
+                                                <ModalBuyItems user ={userName} item = {dataItem?.item} count ={countItem}/>
                                             </Flex>
                                         </Box>
                                     </Box>
