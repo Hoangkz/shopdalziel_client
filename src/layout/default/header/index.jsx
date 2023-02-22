@@ -23,21 +23,22 @@ import { useDispatch, useSelector } from "react-redux";
 import searchSlice from "../../../components/search";
 import shopApi from "../../../API/shopApi";
 import authSlice from '../../../components/auth';
-import { checkAccountSelector, userSelector } from "../../../redux/selectors";
+import { checkAccountSelector } from "../../../redux/selectors";
 import { toast } from "react-toastify";
 import authApi from "../../../API/authApi";
 
-export default function Header(children) {
+export default function Header(props) {
+
+
   const [search, setSearch] = useState("");
   const isLogined = useSelector(checkAccountSelector);
-  let userName = useSelector(userSelector)?.data
-  console.log(isLogined)
-  console.log(typeof(userName))
   const [dataItem, setDataItem] = useState([]);
   const [checkdataItem, setCheckDataItem] = useState(false);
   const handleChangeInput = (e) => {
     setSearch(e.target.value);
   };
+  const userName = props.username
+
   const myElementRef = useRef(null);
   function handleClickFormSearch() {
     return myElementRef.current?.getBoundingClientRect() || 0;
@@ -90,8 +91,11 @@ export default function Header(children) {
   const handleClickLogOut = (e) => {
     authApi.logout()
     .then((response)=>{
-      toast.success(response.data.message);
-      dispatch(authSlice.actions.logout());
+          toast.success(response.data.message);
+          dispatch(authSlice.actions.logout());
+          localStorage.setItem("token", "null");
+          localStorage.setItem("refresh_token", "null");
+          localStorage.setItem("user", "null"); 
     })
     .catch((error) => {
       toast.error(error.response.data.message);
@@ -104,7 +108,7 @@ export default function Header(children) {
       navigate("/search");
     }
   };
-
+  const locationHref = location.pathname==="/"?null:`?next-page=${location.pathname}`
 
   const role = userName?.role;
   return (
@@ -169,7 +173,7 @@ export default function Header(children) {
                   </ListItem>
                   <ListItem className="navItem" margin="8px">
                   <Link
-                    to="/auth/login"
+                    to={`/auth/login${locationHref?locationHref:""}`}
                     style={{ textDecoration: "none", color: "#fff" }}
                   >
                     Đăng nhập
@@ -182,12 +186,12 @@ export default function Header(children) {
                   <ListItem margin="8px" position={"relative"}>
                     <Popover>
                       <PopoverTrigger>
-                        <Button
+                        <Button mt={"-5px"} fontSize="18px"
                           variant={"link"}
                           _hover={{ textDecoration: "none", opacity: "0.6" }}
                           color="#fff"
                         >
-                          {userName?.username}
+                          {userName?.username.charAt(0).toUpperCase() + userName?.username.slice(1)}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent w={"220px"}>

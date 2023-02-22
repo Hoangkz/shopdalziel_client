@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 let token = localStorage.getItem("token")||null
 let refresh_token = localStorage.getItem("refresh_token")||null
-let user = localStorage.getItem("user")||null
+let user = localStorage.getItem("user")||{}
 if(token ==="null"||token==="undefined"){
     token= null
 }
@@ -11,7 +11,7 @@ if(refresh_token ==="null"||refresh_token==="undefined"){
 }
 
 if(user ==="null"||user==="undefined"){
-    user= null
+    user= {}
 }
 
 let checkLogin = false
@@ -35,7 +35,7 @@ export default createSlice({
         
         login:(state, action)=>{
             // xử lý trả dữ liệu
-            console.log(action)
+            // console.log(action)
             state.checkLogin = action.payload.checkLogin
             state.user = action.payload.user
             state.token = action.payload.token
@@ -43,7 +43,7 @@ export default createSlice({
         },
         logout:(state, action)=>{
             state.checkLogin = false
-            state.user = null
+            state.user = {}
             state.token = null
             state.refresh_token = null
         }

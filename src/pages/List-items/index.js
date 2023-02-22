@@ -7,6 +7,7 @@ import shopApi from "../../API/shopApi";
 import ReactPaginate from "react-paginate";
 export default function ListItems(){
     const { slug } = useParams();
+    const  slugUrl = slug
     const [dataItem, setDataItem] = useState()
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,7 +18,7 @@ export default function ListItems(){
     useEffect(() => {
         (async () => {
           try {
-            const res = await shopApi.loaiItems(slug,currentPage);
+            const res = await shopApi.loaiItems(slugUrl,currentPage);
             setDataItem(res.data);
           } catch (error) {
             console.log(error);

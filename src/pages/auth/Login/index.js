@@ -14,7 +14,6 @@ import authSlice from '../../../components/auth';
 export default function SignUp() {
 
     const dispatch = useDispatch();
-
     const handleClickGoBack=()=> {
         startTransition(() => {
             window.history.back();
@@ -50,9 +49,15 @@ export default function SignUp() {
             localStorage.setItem("token", token);
             localStorage.setItem("refresh_token", refresh_token);
             const decoded = jwt_decode(token);
-            // console.log(decoded);
             localStorage.setItem("user", JSON.stringify(decoded.data));
-            navigate('/');
+            const urlParams = new URLSearchParams(window.location.search);
+            const nextPage = urlParams.get('next-page');
+            if(nextPage){
+                navigate(urlParams.get('next-page'));
+            }
+            else{
+                navigate('/');
+            }
 
             dispatch(authSlice.actions.login({checkLogin:true,user:decoded,token:token,refresh_token:refresh_token}));
         })

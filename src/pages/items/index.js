@@ -11,7 +11,7 @@ export default function ListItems() {
     const { slug } = useParams();
     const [dataItem, setDataItem] = useState()
     const [isActive, setIsActive] = useState(false);
-
+    const userName = JSON.parse(localStorage.getItem("user"))
     const toggleClass = () => {
         setIsActive(!isActive);
     }
@@ -97,7 +97,7 @@ export default function ListItems() {
                                             </Flex>
                                             <Flex>
                                                 <Box m="8px 32px 16px 0">Vân chuyển</Box>
-                                                <Box mt={2} fontSize="1.2rem" lineHeight={1.1}>??</Box>
+                                                <Box mt={2} fontSize="1.2rem" lineHeight={1.1}>{userName?.address?userName?.address:"??"}</Box>
                                             </Flex>
                                             <Flex>
                                                 <Box m="8px 32px 16px 0">Số lượng</Box>
