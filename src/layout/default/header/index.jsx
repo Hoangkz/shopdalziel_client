@@ -163,20 +163,20 @@ export default function Header(props) {
               {!isLogined&&!userName ? (
                 <>
                   <ListItem className="navItem" margin="8px">
-                    <Link
-                      to="/auth/signup"
+                    <a
+                      href="/auth/signup"
                       style={{ textDecoration: "none", color: "#fff" }}
                     >
                       Đăng ký
-                    </Link>
+                    </a>
                   </ListItem>
                   <ListItem className="navItem" margin="8px">
-                  <Link
-                    to={`/auth/login${locationHref?locationHref:""}`}
+                  <a
+                    href={`/auth/login${locationHref?locationHref:""}`}
                     style={{ textDecoration: "none", color: "#fff" }}
                   >
                     Đăng nhập
-                  </Link>
+                  </a>
                   </ListItem>
                 </>
               ) : (
@@ -198,7 +198,7 @@ export default function Header(props) {
                         <List>
                           <ListItem className="navItem_hover">
                             <Link
-                              to="/"
+                              to="/auth/user"
                               style={{
                                 display: "block",
                                 color: "black",

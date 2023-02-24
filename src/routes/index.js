@@ -3,6 +3,7 @@ import Items from "../pages/items";
 import Listitem from "../pages/List-items";
 import Search from "../pages/search";
 import Login from "../pages/auth/Login";
+import User from "../pages/auth/User";
 import SignUp from "../pages/auth/SignUp";
 import TodoList from "../components/V-Test";
 import FormLogin from "../API/FormLogin";
@@ -12,6 +13,10 @@ const publicRoutes =[
     {
         path:"/",
         element:Home,
+    },
+    {
+        path:"/auth/user",
+        element:User,
     },
     {
         path:"/items/:slug",

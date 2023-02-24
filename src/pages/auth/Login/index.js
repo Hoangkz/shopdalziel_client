@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Icon, Input } from "@chakra-ui/react";
-import { AiFillFacebook, AiOutlineShoppingCart } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import "../auth.css"
 import React, { startTransition } from 'react';
@@ -10,9 +9,11 @@ import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from 'react-redux';
 import authSlice from '../../../components/auth';
+import Google from "./Google"
+import Facebook from "./FaceBook"
 
 export default function SignUp() {
-
+    
     const dispatch = useDispatch();
     const handleClickGoBack=()=> {
         startTransition(() => {
@@ -65,7 +66,7 @@ export default function SignUp() {
             toast.error(error.response.data.message);
         })
     }
-
+    
     return (
         <>
             <Box boxSizing="inherit">
@@ -92,11 +93,11 @@ export default function SignUp() {
                                             Đăng nhập
                                         </Box>
                                         <Box _hover={{"opacity":'0.6'}}>
-                                            <Link to={"/auth/signup"}>
+                                            <a href={"/auth/signup"}>
                                                 <Box fontWeight={700} fontSize="15px" color={"#ea4d2d"}>
                                                     Đăng ký
                                                 </Box>
-                                            </Link>
+                                            </a>
                                         </Box>
                                     </Flex>
                                 </Box>
@@ -127,17 +128,13 @@ export default function SignUp() {
                                     </Button>
                                 </Flex>
                             </Box>
-                            <Box p={"8px 45px"} w="500px" backgroundColor={"#f5f5f5"} borderRadius={6}>
-                                <Flex justify={"space-between"} boxSizing="revert" p={"4px 12px"}>
-                                    <Box fontWeight={490} bg={"#3a5a98"} color="#fff" fontSize={12} p={"4px 16px"} borderRadius={4}>
-                                        <Icon as={AiFillFacebook} fontSize="20px"margin="2px 4px 4px"/>
-                                        Kết nối với Facebook
-                                    </Box>
-                                    <Box fontWeight={490} bg={"yellow"} color="black" fontSize={12} p={"4px 16px"} borderRadius={4}>
-                                        <Icon as={FcGoogle} fontSize="20px"margin="2px 4px 4px"/>
-                                        Kết nối với Google
-                                    </Box>
+                            <Box w="500px" backgroundColor={"#f5f5f5"} borderRadius={6}>
+                                <Box h={2}></Box>
+                                <Flex justify={"space-around"} boxSizing="revert" p={"4px 12px"}>
+                                    <Facebook/>
+                                    <Google/>
                                 </Flex>
+                                <Box h={2}></Box>
                             </Box>
                         </form>
                     </Box>

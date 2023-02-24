@@ -6,7 +6,8 @@ import "../auth.css"
 import { useState, startTransition, useEffect } from "react";
 import authApi from "../../../API/authApi";
 import { toast } from "react-toastify";
-
+import Google from "../Login/Google"
+import Facebook from "../Login/FaceBook"
 export default function SignUp() {
     const handleClickGoBack = () => {
         startTransition(() => {
@@ -111,11 +112,11 @@ export default function SignUp() {
                                             Đăng ký
                                         </Box>
                                         <Box _hover={{ "opacity": '0.6' }}>
-                                            <Link to={"/auth/login"}>
+                                            <a href={"/auth/login"}>
                                                 <Box fontWeight={700} fontSize="15px" color={"#ea4d2d"}>
                                                     Đăng nhập
                                                 </Box>
-                                            </Link>
+                                            </a>
                                         </Box>
                                     </Flex>
                                 </Box>
@@ -158,17 +159,13 @@ export default function SignUp() {
                                     </Button>
                                 </Flex>
                             </Box>
-                            <Box p={"8px 45px"} w="500px" backgroundColor={"#f5f5f5"} borderRadius={6}>
-                                <Flex justify={"space-between"} boxSizing="revert" p={"4px 12px"}>
-                                    <Box fontWeight={490} bg={"#3a5a98"} color="#fff" fontSize={12} p={"4px 16px"} borderRadius={4}>
-                                        <Icon as={AiFillFacebook} fontSize="20px" margin="2px 4px 4px" />
-                                        Kết nối với Facebook
-                                    </Box>
-                                    <Box fontWeight={490} bg={"yellow"} color="black" fontSize={12} p={"4px 16px"} borderRadius={4}>
-                                        <Icon as={FcGoogle} fontSize="20px" margin="2px 4px 4px" />
-                                        Kết nối với Google
-                                    </Box>
+                            <Box w="500px" backgroundColor={"#f5f5f5"} borderRadius={6}>
+                                <Box h={2}></Box>
+                                <Flex justify={"space-around"} boxSizing="revert" p={"4px 12px"}>
+                                    <Facebook/>
+                                    <Google/>
                                 </Flex>
+                                <Box h={2}></Box>
                             </Box>
                         </form>
                     </Box>
