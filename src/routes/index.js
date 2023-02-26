@@ -7,12 +7,17 @@ import User from "../pages/auth/User";
 import SignUp from "../pages/auth/SignUp";
 import TodoList from "../components/V-Test";
 import FormLogin from "../API/FormLogin";
+import ListUser from "../pages/List-user";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
     {
         path:"/",
         element:Home,
+    },
+    {
+        path:"/admin/list-user",
+        element:ListUser,
     },
     {
         path:"/auth/user",

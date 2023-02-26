@@ -272,7 +272,7 @@ export default function Header(props) {
                               </ListItem>
                               <ListItem className="navItem_hover">
                                 <Link
-                                  to="/"
+                                  to="/admin/list-user"
                                   style={{
                                     display: "block",
                                     color: "black",

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import usersApi from "../../../API/usersApi";
 import { tokenRemainingSelector } from "../../../redux/selectors";
 import "./user.css"
+import ChangePassword from "./ChangePassword"
 export default function User(){
     const dataUser = useSelector(tokenRemainingSelector).user;
     const [click, setClick] = useState(true)
@@ -32,13 +33,17 @@ export default function User(){
     return(
         <>
             <Box backgroundColor="#fff" maxW="80%" mx={"auto"}>
-                <Box mb={"16px"} ml="46px">
+                <Box mb={"16px"} ml="46px" position={"relative"}>
                     <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="400" p="16px" m={0}>
                         Hồ sơ của tôi
                         <Text fontSize="14px">Quản lý thông tin hồ sơ để bảo mật tài khoản</Text>
                     </Heading>
+                    <Box position={"absolute"} top="16px" right={20} >
+                        <ChangePassword id={dataUser?._id}/>
+                    </Box>
                     <Box m={"0 auto"} w={"80%"} backgroundColor="rgb(234, 222, 222)" h={"0.6px"}></Box>
                 </Box>
+                
                 {(dataUser)?
                     <Box>
                         <form onSubmit={handleClickSubmitForm}>

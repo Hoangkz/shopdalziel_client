@@ -8,7 +8,15 @@ const usersApi = {
   updateUser(data) {
     const url = `/user/update`;
     return axiosClient.post(url,data);
-  }
+  },
+  changePassword(data) {
+    const url = `/user/changePassword`;
+    return axiosClient.post(url,data);
+  },
+  forgotpassword(data) {
+    const url = `/user/forgotPassword`;
+    return axiosClient.post(url,data);
+  },
 };
 
 export default usersApi;

@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import authSlice from '../../../components/auth';
 import Google from "./Google"
 import Facebook from "./FaceBook"
-
+import ForgotPassword from "./ForgotPassword"
 export default function SignUp() {
     
     const dispatch = useDispatch();
@@ -110,9 +110,7 @@ export default function SignUp() {
                                     </Box>
                                 </Box>
                                 <Box position={"relative"} fontSize="16px" textAlign={"end"} color={"black"}>
-                                    <Link to={"/"} style={{'margin':"0 8px","color":"#ea4d2d","fontWeight":"700"}} className="linkSupport">
-                                        Quên mật khẩu
-                                    </Link>
+                                    <ForgotPassword/>
                                     <Box className="boderIcon" display="initial"></Box>
                                     <Link className="linkSupport" to={"/"} style={{'margin':"0 8px","color":"#939393","fontWeight":"700"}}>
                                         Cần trợ giúp
