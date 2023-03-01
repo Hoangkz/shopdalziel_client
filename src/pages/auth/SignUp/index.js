@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Icon, Input, Text } from "@chakra-ui/react";
-import { AiFillFacebook, AiOutlineShoppingCart } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import "../auth.css"
 import { useState, startTransition, useEffect } from "react";

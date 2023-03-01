@@ -17,6 +17,14 @@ const usersApi = {
     const url = `/user/forgotPassword`;
     return axiosClient.post(url,data);
   },
+  listUser(data,page) {
+    const url = `/user/show-list?page=${page}`;
+    return axiosClient.post(url,data);
+  },
+  deleteUser(data) {
+    const url = `/user/delete-user`;
+    return axiosClient.post(url,data);
+  },
 };
 
 export default usersApi;

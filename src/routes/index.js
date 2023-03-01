@@ -8,6 +8,8 @@ import SignUp from "../pages/auth/SignUp";
 import TodoList from "../components/V-Test";
 import FormLogin from "../API/FormLogin";
 import ListUser from "../pages/List-user";
+import Forbidden from "../layout/default/Forbidden";
+import UserUpdate from "../pages/users/update";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -16,9 +18,11 @@ const publicRoutes =[
         element:Home,
     },
     {
-        path:"/admin/list-user",
-        element:ListUser,
+        path:"/forbidden",
+        element:Forbidden,
+        layout:null,
     },
+    
     {
         path:"/auth/user",
         element:User,
@@ -57,8 +61,12 @@ const publicRoutes =[
 
 const privateRoutes =[
     {
-        path:"/home",
-        element:Home,
+        path:"/user/update/:slug",
+        element:UserUpdate,
+    },
+    {
+        path:"/admin/list-user",
+        element:ListUser,
     },
 ]
 export { publicRoutes, privateRoutes }
