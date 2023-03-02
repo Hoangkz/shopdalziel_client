@@ -10,6 +10,7 @@ import FormLogin from "../API/FormLogin";
 import ListUser from "../pages/admin/list_user";
 import Forbidden from "../layout/default/Forbidden";
 import UserUpdate from "../pages/admin/update_user";
+import ListItems from "../pages/admin/list_items";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -63,6 +64,10 @@ const privateRoutes =[
     {
         path:"/admin/update-user/:slug",
         element:UserUpdate,
+    },
+    {
+        path:"/admin/list-item",
+        element:ListItems,
     },
     {
         path:"/admin/list-user",
