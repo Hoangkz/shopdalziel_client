@@ -10,7 +10,9 @@ import FormLogin from "../API/FormLogin";
 import ListUser from "../pages/admin/list_user";
 import Forbidden from "../layout/default/Forbidden";
 import UserUpdate from "../pages/admin/update_user";
+import ItemUpdate from "../pages/admin/update_items";
 import ListItems from "../pages/admin/list_items";
+import CreateItems from "../pages/admin/create_items";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -64,6 +66,14 @@ const privateRoutes =[
     {
         path:"/admin/update-user/:slug",
         element:UserUpdate,
+    },
+    {
+        path:"/admin/create-items",
+        element:CreateItems,
+    },
+    {
+        path:"/admin/update-items/:slug",
+        element:ItemUpdate,
     },
     {
         path:"/admin/list-item",

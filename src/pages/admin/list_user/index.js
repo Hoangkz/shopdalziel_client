@@ -1,6 +1,6 @@
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Box, Button, Checkbox, Flex, Heading, Text, Icon, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Heading, Text, Icon, useDisclosure, Input } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -30,6 +30,7 @@ import { toast } from "react-toastify";
 
 
 export default function ListUser() {
+  
     const [isCheckedAll, setIsCheckedAll] = useState(false);
     const [checkboxList, setCheckboxList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
@@ -40,6 +41,12 @@ export default function ListUser() {
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
     const [dataUser, setDataUser] = useState([])
+
+    const [search, setSearch] = useState("")
+
+    const [checkSearch, setCheckSearch] = useState(false);
+
+
     function handlePageClick(selectedPage) {
         setCurrentPage(selectedPage.selected + 1);
     }
@@ -49,6 +56,7 @@ export default function ListUser() {
             try {
                 const formData = new FormData();
                 formData.append('id', user?._id);
+                formData.append('search', search);
                 const res = await usersApi.listUser(formData, currentPage);
                 const listCheckBox = res.data.user.map(user => {
                     return {
@@ -61,17 +69,18 @@ export default function ListUser() {
                 setDataUser(res.data);
                 
             } catch (error) {
+                toast.error(error.response.data.message)
                 if (error.response.status === 403) {
-                    toast.error(error.response.data.message)
                     navigate('/forbidden');
-                    console.log(error)
                 }
                 setDataUser("")
             }
         })();
-    }, [deleteAccount,currentPage]);
+    }, [deleteAccount,currentPage,checkSearch]);
 
-
+    const handleSearchAccount = ()=>{
+        setCheckSearch(!checkSearch)
+    }
     const handleCheckboxChange = (event, index) => {
         const { checked } = event.target;
         const newCheckboxList = [...checkboxList];
@@ -114,9 +123,9 @@ export default function ListUser() {
     const handleClickDelete = (e) => {
         const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
         const list_id = listDelete.map(checkbox => checkbox._id)
-        console.log(list_id)
         const formData = new FormData();
         formData.append("listId", list_id)
+        formData.append("id", user?._id)
         usersApi.deleteUser(formData)
         .then((response) => {
             onClose()
@@ -125,6 +134,9 @@ export default function ListUser() {
         })
         .catch((error) => {
             toast.error(error.response.data.message)
+            if (error.response.status === 403) {
+                navigate('/forbidden');
+            }
         });
     }
     return (
@@ -135,10 +147,14 @@ export default function ListUser() {
                         <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px">DANH SÁCH ACCOUNT</Heading>
                     </Box>
                     {checkDelete &&
-                        <Button onClick={onOpen} style={{ position: "absolute", top: "16px", right: "20%" }} _hover={{ opacity: "0.8" }}>
+                        <Button onClick={onOpen} style={{ position: "absolute", top: "16px", right: "30%" }} _hover={{ opacity: "0.8" }}>
                             <Icon fontSize={"24px"} as={RiDeleteBin6Line} />
                         </Button>
                     }
+                    <Flex style={{ position: "absolute", top: "16px", right: "10px" }}>
+                        <Input placeholder="Tên đăng nhập" onChange={(e)=>setSearch(e.target.value)} />
+                        <Button ml={"2px"} onClick={handleSearchAccount}>Search</Button>
+                    </Flex>
                     <Modal isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />
                         <ModalContent>

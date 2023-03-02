@@ -5,7 +5,6 @@ import DefaultLayout from './layout/default';
 import { Fragment } from 'react';
 import PrivateRoute from './routes/PrivateRoute';
 
-
 export default function App() {
   return (
     <ChakraProvider>
