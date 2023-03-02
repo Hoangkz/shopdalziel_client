@@ -36,7 +36,7 @@ export default function User(){
                 <Box mb={"16px"} ml="46px" position={"relative"}>
                     <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="400" p="16px" m={0}>
                         Hồ sơ của tôi
-                        <Text fontSize="14px">Quản lý thông tin hồ sơ để bảo mật tài khoản</Text>
+                        <Text fontSize="14px" mt={"4px"}>Quản lý thông tin hồ sơ để bảo mật tài khoản</Text>
                     </Heading>
                     <Box position={"absolute"} top="16px" right={20} >
                         <ChangePassword id={dataUser?._id}/>

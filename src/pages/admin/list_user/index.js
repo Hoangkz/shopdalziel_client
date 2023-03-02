@@ -4,8 +4,8 @@ import { Box, Button, Checkbox, Flex, Heading, Text, Icon, useDisclosure } from 
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import usersApi from "../../API/usersApi";
-import { tokenRemainingSelector } from "../../redux/selectors";
+import usersApi from "../../../API/usersApi";
+import { tokenRemainingSelector } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
 import { format } from 'date-fns';
 import {

@@ -7,9 +7,9 @@ import User from "../pages/auth/User";
 import SignUp from "../pages/auth/SignUp";
 import TodoList from "../components/V-Test";
 import FormLogin from "../API/FormLogin";
-import ListUser from "../pages/List-user";
+import ListUser from "../pages/admin/list_user";
 import Forbidden from "../layout/default/Forbidden";
-import UserUpdate from "../pages/users/update";
+import UserUpdate from "../pages/admin/update_user";
 
 const publicRoutes =[
     //thêm layout để có layout riêng

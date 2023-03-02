@@ -59,8 +59,8 @@ export default function UpdateUss() {
             <Box backgroundColor="#fff" maxW="80%" mx={"auto"}>
                 <Box mb={"16px"} ml="46px" position={"relative"}>
                     <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="400" p="16px" m={0}>
-                        Hồ sơ của {fullname||user?.username}
-                        <Text fontSize="14px">Quản lý thông tin hồ sơ để bảo mật tài khoản</Text>
+                        Hồ sơ của <span style={{color:"#fe6433"}} >{fullname||user?.username}</span> 
+                        <Text fontSize="14px" mt={"4px"}>Quản lý thông tin hồ sơ để bảo mật tài khoản</Text>
                     </Heading>
                     <Box m={"0 auto"} w={"80%"} backgroundColor="rgb(234, 222, 222)" h={"0.6px"}></Box>
                 </Box>
