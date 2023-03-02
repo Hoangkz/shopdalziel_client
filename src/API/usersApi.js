@@ -1,9 +1,9 @@
 import axiosClient from "./axiosClient";
 
 const usersApi = {
-  getInfo(id) {
-    const url = `/user/`;
-    return axiosClient.get(url,id);
+  getUser(data) {
+    const url = `/user/show-user`;
+    return axiosClient.post(url,data);
   },
   updateUser(data) {
     const url = `/user/update`;

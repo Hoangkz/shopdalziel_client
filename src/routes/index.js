@@ -61,7 +61,7 @@ const publicRoutes =[
 
 const privateRoutes =[
     {
-        path:"/user/update/:slug",
+        path:"/admin/update-user/:slug",
         element:UserUpdate,
     },
     {

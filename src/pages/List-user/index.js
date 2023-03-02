@@ -109,9 +109,7 @@ export default function ListUser() {
     };
 
     const handleClickUpdate = (e) => {
-        console.log(e)
-        navigate(`/user/update/${e}`);
-
+        navigate(`/admin/update-user/${e}`);
     }
     const handleClickDelete = (e) => {
         const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
