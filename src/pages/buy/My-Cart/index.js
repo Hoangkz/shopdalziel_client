@@ -120,43 +120,45 @@ export default function ListUser() {
             });
     }
 
-    const handleClickBuyCart = (e) => {
-        const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
-        const list_id = listDelete.map(checkbox => checkbox._id)
-        const formData = new FormData();
-        formData.append("listId", list_id)
-        buyApi.delete_cart(formData)
-            .then((response) => {
-                onClose()
-                toast.success(response.data.message)
-                setDeleteCart(!deleteCart)
-            })
-            .catch((error) => {
-                toast.error(error.response.data.message)
-                if (error.response.status === 403) {
-                    navigate('/forbidden');
-                }
-            });
-    }
-
-    const handleClickBuyItems = (e) => {
-        console.log(e)
-    }
+    // const handleClickBuyCart = (e) => {
+    //     const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
+    //     const list_id = listDelete.map(checkbox => checkbox._id)
+    //     const formData = new FormData();
+    //     formData.append("listId", list_id)
+    //     buyApi.delete_cart(formData)
+    //         .then((response) => {
+    //             onClose()
+    //             toast.success(response.data.message)
+    //             setDeleteCart(!deleteCart)
+    //         })
+    //         .catch((error) => {
+    //             toast.error(error.response.data.message)
+    //             if (error.response.status === 403) {
+    //                 navigate('/forbidden');
+    //             }
+    //         });
+    // }
     return (
         <>
             <Box maxW="90%" mx={"auto"}>
                 <Box backgroundColor="#fff" position={"relative"}>
                     <Box color="rgb(149, 147, 147);">
-                        <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px">DANH SÁCH VẬT PHẨM</Heading>
+                        <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px">Giỏ hàng của tôi</Heading>
                     </Box>
                     <Flex style={{ position: "absolute", top: "16px", right: "20%" }}>
                         <Box>
                             {checkDelete &&
                                 <>
                                     <DeleteCart checkboxList={checkboxList} handleClickDelete={handleClickDelete}/>
-                                    <BuyCart checkboxList={checkboxList} handleClickDelete={handleClickBuyCart}/>
+                                    <BuyCart checkboxList={checkboxList}/>
                                 </>
                             }
+                        </Box>
+                    </Flex>
+
+                    <Flex style={{ position: "absolute", top: "16px", right: "36px" }}>
+                        <Box>
+                            <Link to={"/carts-order"}><Box color={"#fe6433"} _hover={{"opacity":"0.8",textDecoration:"underline"}}>Đơn hàng của tôi</Box></Link>
                         </Box>
                     </Flex>
                  

@@ -16,6 +16,14 @@ const buyApi = {
     const url = `/buys/buys-carts`;
     return axiosClient.post(url,data);
   },
+  list_cart_order(page) {
+    const url = `/buys/order-carts?page=${page}`;
+    return axiosClient.get(url);
+  },
+  cancel_cart_order(data) {
+    const url = `/buys/cancel-order-carts`;
+    return axiosClient.post(url,data);
+  },
 };
 
 export default buyApi;

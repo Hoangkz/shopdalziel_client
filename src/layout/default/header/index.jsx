@@ -226,7 +226,7 @@ export default function Header(props) {
                               </ListItem>
                               <ListItem className="navItem_hover">
                                 <Link
-                                  to="/"
+                                  to="/carts-order"
                                   style={{
                                     display: "block",
                                     color: "black",

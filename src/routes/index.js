@@ -14,6 +14,7 @@ import ItemUpdate from "../pages/admin/update_items";
 import ListItems from "../pages/admin/list_items";
 import CreateItems from "../pages/admin/create_items";
 import MyCart from "../pages/buy/My-Cart";
+import CartOrder from "../pages/buy/Cart-Orders";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -90,6 +91,10 @@ const buyRoutes =[
     {
         path:"/carts",
         element:MyCart,
+    },
+    {
+        path:"/carts-order",
+        element:CartOrder,
     },
 ]
 export { publicRoutes, privateRoutes, buyRoutes }
