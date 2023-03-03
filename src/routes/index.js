@@ -6,7 +6,7 @@ import Login from "../pages/auth/Login";
 import User from "../pages/auth/User";
 import SignUp from "../pages/auth/SignUp";
 import TodoList from "../components/V-Test";
-import FormLogin from "../API/FormLogin";
+// import FormLogin from "../API/FormLogin";
 import ListUser from "../pages/admin/list_user";
 import Forbidden from "../layout/default/Forbidden";
 import UserUpdate from "../pages/admin/update_user";
@@ -56,10 +56,10 @@ const publicRoutes =[
         path:"/test",
         element:TodoList,
     },
-    {
-        path:"/testLogin",
-        element:FormLogin,
-    },
+    // {
+    //     path:"/testLogin",
+    //     element:FormLogin,
+    // },
 ]
 
 const privateRoutes =[
