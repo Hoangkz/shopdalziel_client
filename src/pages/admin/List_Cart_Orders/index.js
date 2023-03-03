@@ -39,6 +39,8 @@ export default function ListUser() {
     const navigate = useNavigate();
     const [dataItems, setDataItems] = useState([])
 
+    const [search, setSearch] = useState("")
+    const [checkSearch, setCheckSearch] = useState(false);
 
     function handlePageClick(selectedPage) {
         setCurrentPage(selectedPage.selected + 1);
@@ -48,7 +50,14 @@ export default function ListUser() {
         (async () => {
             setCheckDelete(false)
             try {
-                const res = await buyApi.admin_list_cart_order(currentPage);
+
+                const formData = new FormData();
+                formData.append('search', search);
+                if(checkSearch){
+                    setCheckSearch(!checkSearch)
+                    setCurrentPage(1)
+                }
+                const res = await buyApi.admin_list_cart_order(formData,currentPage);
                 const listCheckBox = res.data.cartItem.map(item => {
                     return {
                         ...item,
@@ -68,9 +77,12 @@ export default function ListUser() {
                 setDataItems("")
             }
         })();
-    }, [deleteCart, currentPage]);
+    }, [deleteCart, currentPage,checkSearch]);
 
-    
+    const handleSearchAccount = () => {
+        setCheckSearch(!checkSearch)
+    }
+
     const handleCheckboxChange = (event, index) => {
         const { checked } = event.target;
         const newCheckboxList = [...checkboxList];
@@ -146,21 +158,6 @@ export default function ListUser() {
         });
     }
     
-    // const handleClickCancelOne =(item,onClose)=>{
-    //     const formData = new FormData();
-    //     const listId = item._id;
-    //     formData.append("listId", listId);
-    //     formData.append("status", "5");
-    //     buyApi.cancel_cart_order(formData)
-    //     .then((response)=>{
-    //         onClose()
-    //         toast.success(response.data.message)
-    //         setDeleteCart(!deleteCart)
-    //     })
-    //     .catch((error)=>{toast.error(error.response.data.message)});
-    // }
-
-    
     const handleClickDeleteOne = (item,onClose) => {
         const formData = new FormData();
         formData.append("listId",item._id);   
@@ -220,21 +217,10 @@ export default function ListUser() {
                                 </Flex>
                             }
                             <Flex>
-                                <Input ml={4} placeholder="Tên người mua"/>
-                                <Button ml={"2px"} >Search</Button>
+                                <Input ml={4} placeholder="Tên người mua" onChange={(e) => setSearch(e.target.value)}/>
+                                <Button ml={"2px"} onClick={handleSearchAccount} >Search</Button>
                             </Flex>
                     </Flex>
-                    {/* <Flex style={{ position: "absolute", top: "16px", right: "16%" }}>
-                        <Box>
-                            {checkDelete &&
-                                <>
-                                    <DeleteCarts checkboxList={checkboxList} handleClickDelete={handleClickDelete}/>
-                                    <CancelCarts checkboxList={checkboxList} handleClickCancelCarts={handleClickCancelCarts}/>
-                                    <ShipCarts checkboxList={checkboxList} handleClickShipCarts={handleClickShipCarts}/>
-                                </>
-                            }
-                        </Box>
-                    </Flex> */}
                     {checkboxList&&checkboxList.length ?
                         <>
                             <TableContainer mt={"16px"}>

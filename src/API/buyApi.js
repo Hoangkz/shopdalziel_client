@@ -20,9 +20,9 @@ const buyApi = {
     const url = `/buys/order-carts?page=${page}`;
     return axiosClient.get(url);
   },
-  admin_list_cart_order(page) {
+  admin_list_cart_order(data,page) {
     const url = `/buys/admin-order-carts?page=${page}`;
-    return axiosClient.get(url);
+    return axiosClient.post(url,data);
   },
   cancel_cart_order(data) {
     const url = `/buys/cancel-order-carts`;

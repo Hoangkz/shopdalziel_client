@@ -77,8 +77,8 @@ export default function ListUser() {
                 setDataItems(res.data);
 
             } catch (error) {
+                toast.error(error.response.data.message)
                 if (error.response.status === 403) {
-                    toast.error(error.response.data.message)
                     navigate('/forbidden');
                     console.log(error)
                 }
