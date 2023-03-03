@@ -13,6 +13,7 @@ import UserUpdate from "../pages/admin/update_user";
 import ItemUpdate from "../pages/admin/update_items";
 import ListItems from "../pages/admin/list_items";
 import CreateItems from "../pages/admin/create_items";
+import MyCart from "../pages/buy/My-Cart";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
@@ -84,4 +85,11 @@ const privateRoutes =[
         element:ListUser,
     },
 ]
-export { publicRoutes, privateRoutes }
+
+const buyRoutes =[
+    {
+        path:"/carts",
+        element:MyCart,
+    },
+]
+export { publicRoutes, privateRoutes, buyRoutes }
