@@ -25,6 +25,8 @@ import CancelCarts from "./CancelCarts";
 import CancelOneCart from "./CancelOneCart";
 import DeleteCarts from "./DeleteCarts";
 import DeleteOneCart from "./DeleteOneCart";
+import ShipCarts from "./ShipCarts";
+import ShipOneCart from "./ShipOneCart";
 export default function ListUser() {
     const { onClose } = useDisclosure();
 
@@ -46,7 +48,7 @@ export default function ListUser() {
         (async () => {
             setCheckDelete(false)
             try {
-                const res = await buyApi.list_cart_order(currentPage);
+                const res = await buyApi.admin_list_cart_order(currentPage);
                 const listCheckBox = res.data.cartItem.map(item => {
                     return {
                         ...item,
@@ -129,6 +131,7 @@ export default function ListUser() {
         const formData = new FormData();
         const listId = listCancel.map((data)=>data._id);
         formData.append("listId", listId);
+        formData.append("status", "5");
         buyApi.cancel_cart_order(formData)
         .then((response)=>{
             onClose()
@@ -143,19 +146,21 @@ export default function ListUser() {
         });
     }
     
-    const handleClickCancelOne =(item,onClose)=>{
-        
-        const formData = new FormData();
-        const listId = item._id;
-        formData.append("listId", listId);
-        buyApi.cancel_cart_order(formData)
-        .then((response)=>{
-            onClose()
-            toast.success(response.data.message)
-            setDeleteCart(!deleteCart)
-        })
-        .catch((error)=>{toast.error(error.response.data.message)});
-    }
+    // const handleClickCancelOne =(item,onClose)=>{
+    //     const formData = new FormData();
+    //     const listId = item._id;
+    //     formData.append("listId", listId);
+    //     formData.append("status", "5");
+    //     buyApi.cancel_cart_order(formData)
+    //     .then((response)=>{
+    //         onClose()
+    //         toast.success(response.data.message)
+    //         setDeleteCart(!deleteCart)
+    //     })
+    //     .catch((error)=>{toast.error(error.response.data.message)});
+    // }
+
+    
     const handleClickDeleteOne = (item,onClose) => {
         const formData = new FormData();
         formData.append("listId",item._id);   
@@ -168,26 +173,53 @@ export default function ListUser() {
         .catch((error) => {toast.success(error.response.data.message)}) 
     }
 
+    const handleClickShipOne =(item,onClose)=>{
+        const formData = new FormData();
+        const listId = item._id;
+        formData.append("listId", listId);
+        buyApi.ship_carts(formData)
+        .then((response)=>{
+            onClose()
+            toast.success(response.data.message)
+            setDeleteCart(!deleteCart)
+        })
+        .catch((error)=>{toast.error(error.response.data.message)});
+    }
+
+    const handleClickShipCarts = (e)=>{
+        const listCancel = checkboxList?.filter((check)=>check.isChecked&&check.status ==="2")
+        const formData = new FormData();
+        const listId = listCancel.map((data)=>data._id);
+        formData.append("listId", listId);
+        buyApi.ship_carts(formData)
+        .then((response)=>{
+            onClose()
+            toast.success(response.data.message)
+            setDeleteCart(!deleteCart)
+        })
+        .catch((error) => {
+            toast.error(error.response.data.message)
+            if (error.response.status === 403) {
+                navigate('/forbidden');
+            }
+        });
+    }
     return (
         <>
             <Box maxW="90%" mx={"auto"}>
                 <Box backgroundColor="#fff" position={"relative"}>
                     <Box color="rgb(149, 147, 147);">
-                        <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px">Đơn hàng của tôi</Heading>
+                        <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px">Danh sách đơn hàng</Heading>
                     </Box>
-                    <Flex style={{ position: "absolute", top: "16px", right: "20%" }}>
+                    <Flex style={{ position: "absolute", top: "16px", right: "16%" }}>
                         <Box>
                             {checkDelete &&
                                 <>
                                     <DeleteCarts checkboxList={checkboxList} handleClickDelete={handleClickDelete}/>
                                     <CancelCarts checkboxList={checkboxList} handleClickCancelCarts={handleClickCancelCarts}/>
+                                    <ShipCarts checkboxList={checkboxList} handleClickShipCarts={handleClickShipCarts}/>
                                 </>
                             }
-                        </Box>
-                    </Flex>
-                    <Flex style={{ position: "absolute", top: "16px", right: "36px" }}>
-                        <Box>
-                            <Link to={"/carts"}><Box color={"#fe6433"} _hover={{"opacity":"0.8",textDecoration:"underline"}}>Giỏ hàng của tôi</Box></Link>
                         </Box>
                     </Flex>
                     {checkboxList&&checkboxList.length ?
@@ -236,13 +268,13 @@ export default function ListUser() {
                                                             item?.status==='1'?"Trong giỏ hàng":
                                                             item.status==='2'?<Text color={"#17a2b8"}>Chờ giao hàng</Text>:
                                                             item.status==='3'?<Text color={"red"}>Đơn hàng đã huỷ</Text>:
-                                                            item.status==='4'?<Text color={"yellow"}>Giao hàng thành công</Text>:""
+                                                            item.status==='4'?<Text color={"green"}>Giao hàng thành công</Text>:
+                                                            item.status==='5'?<Text color={"pink"}>Người bán đã huỷ</Text>:""
                                                         }
                                                     </Td>
                                                     <Td p={"0"}>
                                                         {
-                                                            item?.status==="2"?<CancelOneCart handleClickCancelOne={handleClickCancelOne} item ={item}/>:
-                                                            item?.status==="4"?<Link to={`/items/${item.item_id.name}`}><Button colorScheme={"green"}>Mua lại</Button></Link>:
+                                                            item?.status==="2"?<ShipOneCart handleClickShipOne={handleClickShipOne} item ={item}/>:
                                                             <DeleteOneCart handleClickDeleteOne={handleClickDeleteOne} item ={item}/>
                                                         }
                                                     </Td>
@@ -270,7 +302,7 @@ export default function ListUser() {
                         </> :
                         (<Box h={100}>
                             <Text textAlign={"center"} fontSize="22px">
-                                Bạn chưa có đơn hàng nào!
+                                Chưa có ai mua gì cả!!!
                             </Text>
                         </Box>)
                     }

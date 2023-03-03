@@ -242,7 +242,7 @@ export default function Header(props) {
                           ) : role === 2 ? (
                             <ListItem className="navItem_hover">
                               <Link
-                                to="/"
+                                to="/admin/list-cart-order"
                                 style={{
                                   display: "block",
                                   color: "black",
@@ -258,7 +258,7 @@ export default function Header(props) {
                             <>
                               <ListItem className="navItem_hover">
                                 <Link
-                                  to="/"
+                                  to="/admin/list-cart-order"
                                   style={{
                                     display: "block",
                                     color: "black",

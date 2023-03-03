@@ -236,7 +236,8 @@ export default function ListUser() {
                                                             item?.status==='1'?"Trong giỏ hàng":
                                                             item.status==='2'?<Text color={"#17a2b8"}>Chờ giao hàng</Text>:
                                                             item.status==='3'?<Text color={"red"}>Đơn hàng đã huỷ</Text>:
-                                                            item.status==='4'?<Text color={"yellow"}>Giao hàng thành công</Text>:""
+                                                            item.status==='4'?<Text color={"green"}>Giao hàng thành công</Text>:
+                                                            item.status==='5'?<Text color={"pink"}>Người bán đã huỷ</Text>:""
                                                         }
                                                     </Td>
                                                     <Td p={"0"}>
