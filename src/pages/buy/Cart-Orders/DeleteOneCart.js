@@ -38,7 +38,7 @@ export default function DeleteOneCart({ item, handleClickDeleteOne }) {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button onClick={()=>handleClickDeleteOne(item)} colorScheme='red' mr={3} >Xoá</Button>
+                        <Button onClick={()=>handleClickDeleteOne(item,onClose)} colorScheme='red' mr={3} >Xoá</Button>
                         <Button variant='ghost' onClick={onClose}>Huỷ</Button>
                     </ModalFooter>
                 </ModalContent>

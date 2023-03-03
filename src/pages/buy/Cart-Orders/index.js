@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Checkbox, Flex, Heading, Text, useDisclosure, Image } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Heading, Text, useDisclosure, Image, Button } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -128,7 +128,6 @@ export default function ListUser() {
         const listCancel = checkboxList?.filter((check)=>check.isChecked&&check.status ==="2")
         const formData = new FormData();
         const listId = listCancel.map((data)=>data._id);
-        console.log(listId);
         formData.append("listId", listId);
         buyApi.cancel_cart_order(formData)
         .then((response)=>{
@@ -143,8 +142,9 @@ export default function ListUser() {
             }
         });
     }
-
-    const handleClickCancelOne =(item)=>{
+    
+    const handleClickCancelOne =(item,onClose)=>{
+        
         const formData = new FormData();
         const listId = item._id;
         formData.append("listId", listId);
@@ -156,7 +156,7 @@ export default function ListUser() {
         })
         .catch((error)=>{toast.error(error.response.data.message)});
     }
-    const handleClickDeleteOne = (item) => {
+    const handleClickDeleteOne = (item,onClose) => {
         const formData = new FormData();
         formData.append("listId",item._id);   
         buyApi.delete_cart(formData)
@@ -190,7 +190,7 @@ export default function ListUser() {
                             <Link to={"/carts"}><Box color={"#fe6433"} _hover={{"opacity":"0.8",textDecoration:"underline"}}>Giỏ hàng của tôi</Box></Link>
                         </Box>
                     </Flex>
-                    {checkboxList ?
+                    {checkboxList&&checkboxList.length ?
                         <>
                             <TableContainer mt={"16px"}>
                                 <Table variant='simple' size={"md"}>
@@ -233,7 +233,11 @@ export default function ListUser() {
                                                     <Td>{date && format(new Date(date), 'dd/MM/yyyy')}</Td>
                                                     <Td>{item?.status==='1'?"Trong giỏ hàng":item.status==='2'?"Chờ giao hàng":item.status==='3'?"Đơn hàng đã huỷ":item.status==='4'?"Giao hàng thành công":""}</Td>
                                                     <Td p={"0"}>
-                                                        {item?.status==="2"?<CancelOneCart handleClickCancelOne={handleClickCancelOne} item ={item}/>:<DeleteOneCart handleClickDeleteOne={handleClickDeleteOne} item ={item}/>}
+                                                        {
+                                                            item?.status==="2"?<CancelOneCart handleClickCancelOne={handleClickCancelOne} item ={item}/>:
+                                                            item?.status==="4"?<Link to={`/items/${item.item_id.name}`}><Button colorScheme={"green"}>Mua lại</Button></Link>:
+                                                            <DeleteOneCart handleClickDeleteOne={handleClickDeleteOne} item ={item}/>
+                                                        }
                                                     </Td>
                                                 </Tr>
                                             </Tbody>
@@ -259,7 +263,7 @@ export default function ListUser() {
                         </> :
                         (<Box h={100}>
                             <Text textAlign={"center"} fontSize="22px">
-                                Chưa có dữ liệu
+                                Bạn chưa có đơn hàng nào!
                             </Text>
                         </Box>)
                     }

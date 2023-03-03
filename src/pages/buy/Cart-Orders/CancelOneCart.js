@@ -13,10 +13,6 @@ import {
     Box,
 } from '@chakra-ui/react'
 import { MdCancelPresentation } from 'react-icons/md'
-import { toast } from 'react-toastify';
-import buyApi from '../../../API/buyApi';
-
-
 
 export default function CancelOneCart({item, handleClickCancelOne}) {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,7 +35,7 @@ export default function CancelOneCart({item, handleClickCancelOne}) {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button onClick={()=>handleClickCancelOne(item)} colorScheme='red' mr={3} >Huỷ</Button>
+                        <Button onClick={()=>handleClickCancelOne(item,onClose)} colorScheme='red' mr={3} >Huỷ</Button>
                         <Button variant='ghost' onClick={onClose}>Đóng</Button>
                     </ModalFooter>
                 </ModalContent>

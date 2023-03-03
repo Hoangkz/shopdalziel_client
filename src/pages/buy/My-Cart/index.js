@@ -120,24 +120,6 @@ export default function ListUser() {
             });
     }
 
-    // const handleClickBuyCart = (e) => {
-    //     const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
-    //     const list_id = listDelete.map(checkbox => checkbox._id)
-    //     const formData = new FormData();
-    //     formData.append("listId", list_id)
-    //     buyApi.delete_cart(formData)
-    //         .then((response) => {
-    //             onClose()
-    //             toast.success(response.data.message)
-    //             setDeleteCart(!deleteCart)
-    //         })
-    //         .catch((error) => {
-    //             toast.error(error.response.data.message)
-    //             if (error.response.status === 403) {
-    //                 navigate('/forbidden');
-    //             }
-    //         });
-    // }
     return (
         <>
             <Box maxW="90%" mx={"auto"}>
@@ -162,7 +144,7 @@ export default function ListUser() {
                         </Box>
                     </Flex>
                  
-                    {checkboxList ?
+                    {checkboxList&&checkboxList.length ?
                         <>
                             <TableContainer mt={"16px"}>
                                 <Table variant='simple' size={"md"}>
@@ -229,7 +211,7 @@ export default function ListUser() {
                         </> :
                         (<Box h={100}>
                             <Text textAlign={"center"} fontSize="22px">
-                                Chưa có dữ liệu
+                                Giỏ hàng của bạn chưa có vật phẩm nào!
                             </Text>
                         </Box>)
                     }
