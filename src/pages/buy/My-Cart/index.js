@@ -162,7 +162,7 @@ export default function ListUser() {
                                             <Th p={0} maxW={"100px"}>Số lượng</Th>
                                             <Th>Đơn giá</Th>
                                             <Th>Tổng giá</Th>
-                                            <Th>Ngày tạo</Th>
+                                            <Th>Ngày thêm</Th>
                                             <Th p={0} ></Th>
                                         </Tr>
                                     </Thead>
