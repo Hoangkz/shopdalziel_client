@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Checkbox, Flex, Heading, Text, useDisclosure, Image, Button } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Heading, Text, useDisclosure, Image, Button, Input } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -211,7 +211,20 @@ export default function ListUser() {
                     <Box color="rgb(149, 147, 147);">
                         <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px">Danh sách đơn hàng</Heading>
                     </Box>
-                    <Flex style={{ position: "absolute", top: "16px", right: "16%" }}>
+                    <Flex style={{ position: "absolute", top: "16px", right: "10px" }}>
+                            {checkDelete &&
+                                <Flex>
+                                    <DeleteCarts checkboxList={checkboxList} handleClickDelete={handleClickDelete}/>
+                                    <CancelCarts checkboxList={checkboxList} handleClickCancelCarts={handleClickCancelCarts}/>
+                                    <ShipCarts checkboxList={checkboxList} handleClickShipCarts={handleClickShipCarts}/>
+                                </Flex>
+                            }
+                            <Flex>
+                                <Input ml={4} placeholder="Tên người mua"/>
+                                <Button ml={"2px"} >Search</Button>
+                            </Flex>
+                    </Flex>
+                    {/* <Flex style={{ position: "absolute", top: "16px", right: "16%" }}>
                         <Box>
                             {checkDelete &&
                                 <>
@@ -221,7 +234,7 @@ export default function ListUser() {
                                 </>
                             }
                         </Box>
-                    </Flex>
+                    </Flex> */}
                     {checkboxList&&checkboxList.length ?
                         <>
                             <TableContainer mt={"16px"}>
@@ -236,6 +249,8 @@ export default function ListUser() {
                                             </Th>
                                             <Th p={"8px 12px"} >STT</Th>
                                             <Th p={"8px 12px"}>Tên sản phẩm</Th>
+                                            <Th p={"8px 12px"}>Người mua</Th>
+                                            <Th p={"8px 12px"}>Số điện thoại</Th>
                                             <Th>Ảnh</Th>
                                             <Th p={0} maxW={"100px"}>Số lượng</Th>
                                             <Th>Đơn giá</Th>
@@ -258,8 +273,10 @@ export default function ListUser() {
                                                     </Td>
                                                     <Td p={"8px 16px"}>{index + 1}</Td>
                                                     <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link to={`/items/${item.item_id.name}`} >{item.item_id.name}</Link></Td>
+                                                    <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link to={`/admin/update-user/${item.user_id._id}`} >{item.user_id.fullname?item.user_id.fullname:item.user_id.username}</Link></Td>
+                                                    <Td p={"8px 12px"}>{item.user_id.tell}</Td>
                                                     <Td> <Image w={"60px"} src={item.item_id.img}/>  </Td>
-                                                    <Td p={0}>{item.soluong}</Td>
+                                                    <Td p={0} textAlign="center">{item.soluong}</Td>
                                                     <Td>{item.gia}</Td>
                                                     <Td>{item.tong_gia}</Td>
                                                     <Td>{date && format(new Date(date), 'dd/MM/yyyy')}</Td>
@@ -272,7 +289,7 @@ export default function ListUser() {
                                                             item.status==='5'?<Text color={"pink"}>Người bán đã huỷ</Text>:""
                                                         }
                                                     </Td>
-                                                    <Td p={"0"}>
+                                                    <Td p={"16px"}>
                                                         {
                                                             item?.status==="2"?<ShipOneCart handleClickShipOne={handleClickShipOne} item ={item}/>:
                                                             <DeleteOneCart handleClickDeleteOne={handleClickDeleteOne} item ={item}/>

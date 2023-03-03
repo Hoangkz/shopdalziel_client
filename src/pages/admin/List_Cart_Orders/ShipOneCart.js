@@ -19,7 +19,7 @@ export default function ShipOneCart({item, handleClickShipOne}) {
    
     return (
         <>
-            <Button onClick={onOpen} _hover={{ opacity: "0.8" }}>
+            <Button onClick={onOpen} colorScheme="twitter" _hover={{ opacity: "0.8" }}>
                 <Icon fontSize={"24px"} as={FcShipped} />
             </Button>
             <Modal isOpen={isOpen} onClose={onClose}>

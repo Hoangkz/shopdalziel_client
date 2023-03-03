@@ -172,8 +172,10 @@ export default function ListUser() {
                         <Box m={"0 8px"}>
                             <Button onClick={handleClickCreate} colorScheme={"blue"}>Thêm vật phẩm</Button>
                         </Box>
-                        <Input placeholder="Tên vật phẩm" onChange={(e) => setSearch(e.target.value)} />
-                        <Button ml={"2px"} onClick={handleSearchAccount}>Search</Button>
+                        <Flex>
+                            <Input placeholder="Tên vật phẩm" onChange={(e) => setSearch(e.target.value)} />
+                            <Button ml={"2px"} onClick={handleSearchAccount}>Search</Button>
+                        </Flex>
                     </Flex>
                     <Modal isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />

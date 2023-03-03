@@ -21,7 +21,7 @@ export default function ShipCarts({checkboxList, handleClickShipCarts}) {
     
     return (
         <>
-            <Button ml={4} onClick={onOpen} _hover={{ opacity: "0.8" }}>
+            <Button ml={4} colorScheme="twitter" onClick={onOpen} _hover={{ opacity: "0.8" }}>
                 <Icon fontSize={"24px"} as={FcShipped} />
             </Button>
             <Modal isOpen={isOpen} onClose={onClose}>
