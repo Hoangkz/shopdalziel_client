@@ -14,31 +14,43 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import buyApi from "../../API/buyApi";
 
 export default function ManualClose(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    const id_user = props?.user?._id;
-    const id_item = props?.item?._id;
-    const soluong = props?.count;
-    const gia = props?.item?.gia;
-    const tong_gia = props?.item?.gia * props?.count;
-    const formData = new FormData();
-    formData.append("user_id",id_user);
-    formData.append("item_id",id_item);
-    formData.append("soluong",soluong);
-    formData.append("gia",gia);
-    formData.append("tong_gia",tong_gia);
-    buyApi.Cart_Items(formData)
-    .then((response)=>{
-      toast.success(response.data.message);
-      onClose()
-    })
-    .catch((error)=>{toast.error(error.response.data.message)})
+    if(props.user){
+      const id_user = props?.user?._id;
+      const id_item = props?.item?._id;
+      const soluong = props?.count;
+      const gia = props?.item?.gia;
+      const tong_gia = props?.item?.gia * props?.count;
+      const formData = new FormData();
+      formData.append("user_id", id_user);
+      formData.append("item_id", id_item);
+      formData.append("soluong", soluong);
+      formData.append("gia", gia);
+      formData.append("tong_gia", tong_gia);
+      buyApi.Cart_Items(formData)
+        .then((response) => {
+          toast.success(response.data.message);
+          onClose();
+          navigate(`/carts`);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    }
+    else{
+      toast.error("Bạn cần phải đăng nhập trước")
+      navigate(`/auth/login?next-page=${location.pathname}`);
+    }
   };
 
   return (

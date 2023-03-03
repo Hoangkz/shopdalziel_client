@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import buyApi from "../../API/buyApi";
 
 export default function ManualClose(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,8 +24,28 @@ export default function ManualClose(props) {
 
   const handleClickModal = (e) => {
     if(props.user){
-      console.log(props.user)
-      console.log(props.item)
+      const id_user = props?.user?._id;
+      const id_item = props?.item?._id;
+      const soluong = props?.count;
+      const gia = props?.item?.gia;
+      const tong_gia = props?.item?.gia * props?.count;
+      const formData = new FormData();
+      formData.append("user_id", id_user);
+      formData.append("item_id", id_item);
+      formData.append("soluong", soluong);
+      formData.append("gia", gia);
+      formData.append("tong_gia", tong_gia);
+      formData.append("buy", true);
+      formData.append("status", "2");
+      buyApi.Cart_Items(formData)
+        .then((response) => {
+          onClose();
+          toast.success(response.data.message);
+          navigate(`/carts-order`);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
     }
     else{
       toast.error("Bạn cần phải đăng nhập trước")
