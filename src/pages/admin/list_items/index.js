@@ -52,6 +52,7 @@ export default function ListUser() {
     function handlePageClick(selectedPage) {
         setCurrentPage(selectedPage.selected + 1);
     }
+    
     useEffect(() => {
         (async () => {
             setCheckDelete(false)
@@ -59,6 +60,11 @@ export default function ListUser() {
                 const formData = new FormData();
                 formData.append('id', user?._id);
                 formData.append('search', search);
+        
+                if(checkSearch){
+                    setCheckSearch(!checkSearch)
+                    setCurrentPage(1)
+                }
                 const res = await shopApi.list_Items(formData, currentPage);
                 const listCheckBox = res.data.items.map(item => {
                     return {
@@ -253,7 +259,6 @@ export default function ListUser() {
                             </Text>
                         </Box>)
                     }
-                    {/* <Box position={"absolute"} bottom="20px" right={"10%"}></Box> */}
                 </Box>
             </Box>
         </>
