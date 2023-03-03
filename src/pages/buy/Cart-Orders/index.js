@@ -231,7 +231,14 @@ export default function ListUser() {
                                                     <Td>{item.gia}</Td>
                                                     <Td>{item.tong_gia}</Td>
                                                     <Td>{date && format(new Date(date), 'dd/MM/yyyy')}</Td>
-                                                    <Td>{item?.status==='1'?"Trong giỏ hàng":item.status==='2'?"Chờ giao hàng":item.status==='3'?"Đơn hàng đã huỷ":item.status==='4'?"Giao hàng thành công":""}</Td>
+                                                    <Td>
+                                                        {
+                                                            item?.status==='1'?"Trong giỏ hàng":
+                                                            item.status==='2'?<Text color={"#17a2b8"}>Chờ giao hàng</Text>:
+                                                            item.status==='3'?<Text color={"red"}>Đơn hàng đã huỷ</Text>:
+                                                            item.status==='4'?<Text color={"yellow"}>Giao hàng thành công</Text>:""
+                                                        }
+                                                    </Td>
                                                     <Td p={"0"}>
                                                         {
                                                             item?.status==="2"?<CancelOneCart handleClickCancelOne={handleClickCancelOne} item ={item}/>:
