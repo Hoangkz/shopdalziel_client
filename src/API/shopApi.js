@@ -33,6 +33,10 @@ const shopApi = {
     const url = `/items/create-items`;
     return axiosClient.post(url,data);
   },
+  update_Items(data) {
+    const url = `/items/update-items`;
+    return axiosClient.post(url,data);
+  },
 };
 
 export default shopApi;

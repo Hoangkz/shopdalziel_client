@@ -72,7 +72,7 @@ const privateRoutes =[
         element:CreateItems,
     },
     {
-        path:"/admin/update-items/:slug",
+        path:"/admin/update-items",
         element:ItemUpdate,
     },
     {

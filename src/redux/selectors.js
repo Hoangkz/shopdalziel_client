@@ -33,3 +33,4 @@ export const tokenRemainingSelector = createSelector(
             checkLogin,user,token,refresh_token
         }}
     )
+export const updateItemsSelector = (state)=>state.updateItemsSlice.items;

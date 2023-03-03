@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { tokenRemainingSelector } from "../../../redux/selectors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
 import {
     Modal,
@@ -28,6 +28,7 @@ import {
 import { toast } from "react-toastify";
 import shopApi from "../../../API/shopApi";
 
+import update_items from "../../../components/update_items"
 
 export default function ListUser() {
 
@@ -118,9 +119,11 @@ export default function ListUser() {
             }
         }
     };
+    const dispatch = useDispatch()
 
     const handleClickUpdate = (e) => {
-        navigate(`/admin/update-items/${e}`);
+        dispatch(update_items.actions.update(e))
+        navigate(`/admin/update-items`);
     }
     const handleClickDelete = (e) => {
         const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
@@ -220,7 +223,7 @@ export default function ListUser() {
                                                     <Td>{item.gia}</Td>
                                                     <Td>{date && format(new Date(date), 'dd/MM/yyyy')}</Td>
                                                     <Td p={"0"}>
-                                                        <Button colorScheme='green' onClick={() => { handleClickUpdate(item._id) }} mr={"10px"}>Update</Button>
+                                                        <Button colorScheme='green' onClick={() => { handleClickUpdate(item) }} mr={"10px"}>Update</Button>
                                                     </Td>
                                                 </Tr>
                                             </Tbody>

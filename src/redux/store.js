@@ -4,6 +4,7 @@ import filtersSlice from "../components/Filters/filtersSlice";
 import todosSlice from "../components/TodoList/todosSlice";
 import searchSlice from "../components/search";
 import authSlice from "../components/auth";
+import updateItemsSlice from "../components/update_items";
  
 export default configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
         todoList: todosSlice.reducer,
         searchHeader:searchSlice.reducer,
         authSlice:authSlice.reducer,
+        updateItemsSlice:updateItemsSlice.reducer,
     }
 })
 
