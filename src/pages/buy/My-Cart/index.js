@@ -1,21 +1,10 @@
 import React from "react";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { Box, Button, Checkbox, Flex, Heading, Text, Icon, useDisclosure, Input } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Heading, Text, useDisclosure, Image } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { tokenRemainingSelector } from "../../../redux/selectors";
-import { useDispatch, useSelector } from "react-redux";
 import { format } from 'date-fns';
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-} from '@chakra-ui/react'
+
 import {
     Table,
     Thead,
@@ -26,27 +15,22 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 import { toast } from "react-toastify";
-import shopApi from "../../../API/shopApi";
 
-import update_items from "../../../components/update_items"
-
+import buyApi from "../../../API/buyApi";
+import DeleteCart from "./DeleteCart";
+import BuyCart from "./BuyCarts";
+import BuyOneCart from "./BuyOneCart";
 export default function ListUser() {
+    const { onClose } = useDisclosure();
 
     const [isCheckedAll, setIsCheckedAll] = useState(false);
     const [checkboxList, setCheckboxList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
-    const [deleteAccount, setDeleteAccount] = useState(false);
-    const { isOpen, onOpen, onClose } = useDisclosure()
-
-    const user = useSelector(tokenRemainingSelector).user;
+    const [deleteCart, setDeleteCart] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
     const [dataItems, setDataItems] = useState([])
-
-    const [search, setSearch] = useState("")
-
-    const [checkSearch, setCheckSearch] = useState(false);
 
 
     function handlePageClick(selectedPage) {
@@ -57,16 +41,8 @@ export default function ListUser() {
         (async () => {
             setCheckDelete(false)
             try {
-                const formData = new FormData();
-                formData.append('id', user?._id);
-                formData.append('search', search);
-        
-                if(checkSearch){
-                    setCheckSearch(!checkSearch)
-                    setCurrentPage(1)
-                }
-                const res = await shopApi.list_Items(formData, currentPage);
-                const listCheckBox = res.data.items.map(item => {
+                const res = await buyApi.list_cart(currentPage);
+                const listCheckBox = res.data.cartItem.map(item => {
                     return {
                         ...item,
                         isChecked: false
@@ -77,19 +53,17 @@ export default function ListUser() {
                 setDataItems(res.data);
 
             } catch (error) {
+                toast.error(error.response.data.message)
                 if (error.response.status === 403) {
-                    toast.error(error.response.data.message)
                     navigate('/forbidden');
                     console.log(error)
                 }
                 setDataItems("")
             }
         })();
-    }, [deleteAccount, currentPage, checkSearch]);
+    }, [deleteCart, currentPage]);
 
-    const handleSearchAccount = () => {
-        setCheckSearch(!checkSearch)
-    }
+    
     const handleCheckboxChange = (event, index) => {
         const { checked } = event.target;
         const newCheckboxList = [...checkboxList];
@@ -125,23 +99,18 @@ export default function ListUser() {
             }
         }
     };
-    const dispatch = useDispatch()
 
-    const handleClickUpdate = (e) => {
-        dispatch(update_items.actions.update(e))
-        navigate(`/admin/update-items`);
-    }
+    
     const handleClickDelete = (e) => {
         const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
         const list_id = listDelete.map(checkbox => checkbox._id)
         const formData = new FormData();
         formData.append("listId", list_id)
-        formData.append("id", user?._id)
-        shopApi.delete_Items(formData)
+        buyApi.delete_cart(formData)
             .then((response) => {
                 onClose()
                 toast.success(response.data.message)
-                setDeleteAccount(!deleteAccount)
+                setDeleteCart(!deleteCart)
             })
             .catch((error) => {
                 toast.error(error.response.data.message)
@@ -151,8 +120,27 @@ export default function ListUser() {
             });
     }
 
-    const handleClickCreate = (e) => {
-        navigate('/admin/create-items');
+    const handleClickBuyCart = (e) => {
+        const listDelete = checkboxList.filter(checkbox => checkbox.isChecked)
+        const list_id = listDelete.map(checkbox => checkbox._id)
+        const formData = new FormData();
+        formData.append("listId", list_id)
+        buyApi.delete_cart(formData)
+            .then((response) => {
+                onClose()
+                toast.success(response.data.message)
+                setDeleteCart(!deleteCart)
+            })
+            .catch((error) => {
+                toast.error(error.response.data.message)
+                if (error.response.status === 403) {
+                    navigate('/forbidden');
+                }
+            });
+    }
+
+    const handleClickBuyItems = (e) => {
+        console.log(e)
     }
     return (
         <>
@@ -161,37 +149,17 @@ export default function ListUser() {
                     <Box color="rgb(149, 147, 147);">
                         <Heading fontSize="1.25rem" lineHeight={1.2} fontWeight="500" p="16px">DANH SÁCH VẬT PHẨM</Heading>
                     </Box>
-                    <Flex style={{ position: "absolute", top: "16px", right: "10px" }}>
+                    <Flex style={{ position: "absolute", top: "16px", right: "20%" }}>
                         <Box>
                             {checkDelete &&
-                                <Button onClick={onOpen} _hover={{ opacity: "0.8" }}>
-                                    <Icon fontSize={"24px"} as={RiDeleteBin6Line} />
-                                </Button>
+                                <>
+                                    <DeleteCart checkboxList={checkboxList} handleClickDelete={handleClickDelete}/>
+                                    <BuyCart checkboxList={checkboxList} handleClickDelete={handleClickBuyCart}/>
+                                </>
                             }
                         </Box>
-                        <Box m={"0 8px"}>
-                            <Button onClick={handleClickCreate} colorScheme={"blue"}>Thêm vật phẩm</Button>
-                        </Box>
-                        <Input placeholder="Tên vật phẩm" onChange={(e) => setSearch(e.target.value)} />
-                        <Button ml={"2px"} onClick={handleSearchAccount}>Search</Button>
                     </Flex>
-                    <Modal isOpen={isOpen} onClose={onClose}>
-                        <ModalOverlay />
-                        <ModalContent>
-                            <ModalHeader>Xoá vật phẩm</ModalHeader>
-                            <ModalCloseButton />
-                            <ModalBody>
-                                <Text>
-                                    Bạn có muốn các vật phẩm đã đánh dấu hay không?
-                                </Text>
-                            </ModalBody>
-
-                            <ModalFooter>
-                                <Button onClick={handleClickDelete} colorScheme='red' mr={3} >Xoá</Button>
-                                <Button variant='ghost' onClick={onClose}>Huỷ</Button>
-                            </ModalFooter>
-                        </ModalContent>
-                    </Modal>
+                 
                     {checkboxList ?
                         <>
                             <TableContainer mt={"16px"}>
@@ -206,8 +174,10 @@ export default function ListUser() {
                                             </Th>
                                             <Th p={"8px 12px"} >STT</Th>
                                             <Th p={"8px 12px"}>Tên sản phẩm</Th>
-                                            <Th>Số lượng</Th>
+                                            <Th>Ảnh</Th>
+                                            <Th p={0} maxW={"100px"}>Số lượng</Th>
                                             <Th>Đơn giá</Th>
+                                            <Th>Tổng giá</Th>
                                             <Th>Ngày tạo</Th>
                                             <Th p={0} ></Th>
                                         </Tr>
@@ -224,12 +194,14 @@ export default function ListUser() {
                                                         ></Checkbox>
                                                     </Td>
                                                     <Td p={"8px 16px"}>{index + 1}</Td>
-                                                    <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link >{item.name}</Link></Td>
-                                                    <Td>{item.soluong}</Td>
+                                                    <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link to={`/items/${item.item_id.name}`} >{item.item_id.name}</Link></Td>
+                                                    <Td> <Image w={"60px"} src={item.item_id.img}/>  </Td>
+                                                    <Td p={0}>{item.soluong}</Td>
                                                     <Td>{item.gia}</Td>
+                                                    <Td>{item.tong_gia}</Td>
                                                     <Td>{date && format(new Date(date), 'dd/MM/yyyy')}</Td>
                                                     <Td p={"0"}>
-                                                        <Button colorScheme='green' onClick={() => { handleClickUpdate(item) }} mr={"10px"}>Update</Button>
+                                                        <BuyOneCart item = {item} />
                                                     </Td>
                                                 </Tr>
                                             </Tbody>

@@ -28,8 +28,8 @@ export default function ManualClose(props) {
     const gia = props?.item?.gia;
     const tong_gia = props?.item?.gia * props?.count;
     const formData = new FormData();
-    formData.append("id_user",id_user);
-    formData.append("id_item",id_item);
+    formData.append("user_id",id_user);
+    formData.append("item_id",id_item);
     formData.append("soluong",soluong);
     formData.append("gia",gia);
     formData.append("tong_gia",tong_gia);
