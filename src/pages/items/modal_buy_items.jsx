@@ -24,6 +24,7 @@ export default function ManualClose(props) {
   const handleClickModal = (e) => {
     if(props.user){
       console.log(props.user)
+      console.log(props.item)
     }
     else{
       toast.error("Bạn cần phải đăng nhập trước")

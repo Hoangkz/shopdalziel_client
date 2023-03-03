@@ -212,7 +212,7 @@ export default function Header(props) {
                             <>
                               <ListItem className="navItem_hover">
                                 <Link
-                                  to="/"
+                                  to="/carts"
                                   style={{
                                     display: "block",
                                     color: "black",
@@ -410,9 +410,11 @@ export default function Header(props) {
                 </Button>
               </Flex>
             </Box>
-            <Box fontSize="2.5rem" color="#fff" className="navItem">
-              <Icon as={AiOutlineShoppingCart} />
-            </Box>
+            <Link to={"/carts"}>
+              <Box fontSize="2.5rem" color="#fff" className="navItem">
+                <Icon as={AiOutlineShoppingCart} />
+              </Box>
+            </Link>
           </Flex>
         </Box>
         <Box h={4}></Box>
