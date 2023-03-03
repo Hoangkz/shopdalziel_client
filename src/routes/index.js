@@ -13,8 +13,8 @@ import UserUpdate from "../pages/admin/update_user";
 import ItemUpdate from "../pages/admin/update_items";
 import ListItems from "../pages/admin/list_items";
 import CreateItems from "../pages/admin/create_items";
-import MyCart from "../pages/buy/My-Cart";
-import CartOrder from "../pages/buy/Cart-Orders";
+import MyCart from "../pages/buy/MyCart";
+import CartOrder from "../pages/buy/CartOrders";
 
 const publicRoutes =[
     //thêm layout để có layout riêng
