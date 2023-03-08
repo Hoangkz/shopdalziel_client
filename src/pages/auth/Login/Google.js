@@ -16,7 +16,7 @@ export default function Google () {
           buttonText="Đăng nhập với Google"
           onSuccess={onSuccess}
           onFailure={onFailure}
-          cookiePolicy={"single_host_origin"}
+          // cookiePolicy={"single_host_origin"}
         />
     </div>
   );

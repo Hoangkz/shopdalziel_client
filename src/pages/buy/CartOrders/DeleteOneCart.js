@@ -10,11 +10,8 @@ import {
     Button,
     Icon,
     Text,
-    Box
 } from '@chakra-ui/react'
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { toast } from 'react-toastify';
-import buyApi from '../../../API/buyApi';
 
 
 
