@@ -1,3 +1,4 @@
+import React from 'react';
 import GoogleLogin from 'react-google-login';
 export default function Google () {
   const onSuccess = (response) => {
