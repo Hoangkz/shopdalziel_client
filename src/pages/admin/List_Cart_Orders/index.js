@@ -29,7 +29,6 @@ import ShipCarts from "./ShipCarts";
 import ShipOneCart from "./ShipOneCart";
 export default function ListUser() {
     const { onClose } = useDisclosure();
-
     const [isCheckedAll, setIsCheckedAll] = useState(false);
     const [checkboxList, setCheckboxList] = useState([]);
     const [checkDelete, setCheckDelete] = useState(false);
@@ -50,7 +49,6 @@ export default function ListUser() {
         (async () => {
             setCheckDelete(false)
             try {
-
                 const formData = new FormData();
                 formData.append('search', search);
                 if(checkSearch){
@@ -246,11 +244,11 @@ export default function ListUser() {
                                             <Th p={0} ></Th>
                                         </Tr>
                                     </Thead>
+                                    <Tbody>
                                     {checkboxList.map((item, index) => {
                                         const date = item?.updatedAt || null
                                         return (
-                                            <Tbody key={index}>
-                                                <Tr>
+                                                <Tr key={index}>
                                                     <Td p={"4px 16px"}>
                                                         <Checkbox
                                                             isChecked={item.isChecked}
@@ -258,21 +256,21 @@ export default function ListUser() {
                                                         ></Checkbox>
                                                     </Td>
                                                     <Td p={"8px 16px"}>{index + 1}</Td>
-                                                    <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link to={`/items/${item.item_id.name}`} >{item.item_id.name}</Link></Td>
-                                                    <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link to={`/admin/update-user/${item.user_id._id}`} >{item.user_id.fullname?item.user_id.fullname:item.user_id.username}</Link></Td>
-                                                    <Td p={"8px 12px"}>{item.user_id.tell}</Td>
-                                                    <Td> <Image w={"60px"} src={item.item_id.img}/>  </Td>
-                                                    <Td p={0} textAlign="center">{item.soluong}</Td>
-                                                    <Td>{item.gia}</Td>
-                                                    <Td>{item.tong_gia}</Td>
+                                                    <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link to={`/items/${item?.item_id?.name}`} >{item?.item_id?.name}</Link></Td>
+                                                    <Td p={"8px 12px"} fontWeight={"500"} _hover={{ textDecoration: "underline" }} color="blue" ><Link to={`/admin/update-user/${item?.user_id?._id}`} >{item?.user_id?.fullname?item?.user_id?.fullname:item?.user_id?.username}</Link></Td>
+                                                    <Td p={"8px 12px"}>{item?.user_id?.tell}</Td>
+                                                    <Td> <Image w={"60px"} src={item?.item_id?.img}/>  </Td>
+                                                    <Td p={0} textAlign="center">{item?.soluong}</Td>
+                                                    <Td>{item?.gia}</Td>
+                                                    <Td>{item?.tong_gia}</Td>
                                                     <Td>{date && format(new Date(date), 'dd/MM/yyyy')}</Td>
                                                     <Td>
                                                         {
                                                             item?.status==='1'?"Trong giỏ hàng":
-                                                            item.status==='2'?<Text color={"#17a2b8"}>Chờ giao hàng</Text>:
-                                                            item.status==='3'?<Text color={"red"}>Đơn hàng đã huỷ</Text>:
-                                                            item.status==='4'?<Text color={"green"}>Giao hàng thành công</Text>:
-                                                            item.status==='5'?<Text color={"pink"}>Người bán đã huỷ</Text>:""
+                                                            item?.status==='2'?<Text color={"#17a2b8"}>Chờ giao hàng</Text>:
+                                                            item?.status==='3'?<Text color={"red"}>Đơn hàng đã huỷ</Text>:
+                                                            item?.status==='4'?<Text color={"green"}>Giao hàng thành công</Text>:
+                                                            item?.status==='5'?<Text color={"pink"}>Người bán đã huỷ</Text>:""
                                                         }
                                                     </Td>
                                                     <Td p={"16px"}>
@@ -282,9 +280,9 @@ export default function ListUser() {
                                                         }
                                                     </Td>
                                                 </Tr>
-                                            </Tbody>
                                         )
                                     })}
+                                    </Tbody>
                                 </Table>
                             </TableContainer>
                             <Flex p="4" justify={"center"}>
